@@ -6,8 +6,8 @@ const offerTypes = [`Apartment`, `Private room`];
 
 const getRandomCoords = (city: string) => {
   return {
-    LAT: cities[city].LAT + Math.random() / 20,
-    LNG: cities[city].LNG + Math.random() / 20
+    LAT: (Math.random() > 0.5) ? (cities[city].LAT + Math.random() / 20) : (cities[city].LAT - Math.random() / 20),
+    LNG: (Math.random() > 0.5) ? (cities[city].LNG + Math.random() / 20) : (cities[city].LNG - Math.random() / 20),
   };
 };
 

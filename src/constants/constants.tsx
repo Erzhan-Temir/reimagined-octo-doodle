@@ -1,4 +1,4 @@
-import {CitiesDictionary} from '../types/utils';
+import {CitiesDictionary, SortingDictionary} from '../types/utils';
 
 export const cities: CitiesDictionary = {
   "Amsterdam": {
@@ -25,6 +25,13 @@ export const cities: CitiesDictionary = {
     LAT: 51.22172,
     LNG: 6.77616,
   },
+};
+
+export const sorting: SortingDictionary = {
+  "Popular": `popular`,
+  "Price: low to high": `to-high`,
+  "Price: high to low": `to-low`,
+  "Top rated first": `top-rated`,
 };
 
 export const citiesNameList = Object.keys(cities);

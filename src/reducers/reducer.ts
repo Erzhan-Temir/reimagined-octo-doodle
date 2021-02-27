@@ -2,8 +2,8 @@
 import {State} from '../types/offers';
 import API from '../services/api';
 import {Dispatch} from 'redux';
-import {citiesNameList} from '../constants/constants';
-import {ChangeCity} from '../types/actions';
+import {citiesNameList, sorting} from '../constants/constants';
+import {ChangeCity, ChangeSorting} from '../types/actions';
 
 type Action = {
   type: string,
@@ -14,6 +14,7 @@ const initialState: State = {
   isLoading: true,
   offers: [],
   currentCity: citiesNameList[0],
+  sorting: sorting["Popular"],
 };
 
 export const reducer = (state: State = initialState, action: Action) => {
@@ -30,6 +31,11 @@ export const reducer = (state: State = initialState, action: Action) => {
     case `CHANGE_CITY`:
       return Object.assign({}, state, {
         currentCity: action.payload,
+        sorting: sorting["Popular"],
+      });
+    case `CHANGE_SORTING`:
+      return Object.assign({}, state, {
+        sorting: action.payload,
       });
     default:
       return state;
@@ -52,6 +58,12 @@ export const ActionsCreator = {
     return {
       type: `CHANGE_CITY`,
       payload: city,
+    };
+  },
+  changeSorting: (sorting: string): ChangeSorting => {
+    return {
+      type: `CHANGE_SORTING`,
+      payload: sorting,
     };
   }
 };

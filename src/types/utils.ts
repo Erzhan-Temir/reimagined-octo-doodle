@@ -6,3 +6,7 @@ export type itemCoords = {
 export interface CitiesDictionary {
   [Key: string]: itemCoords;
 }
+
+export interface SortingDictionary {
+  [Key: string]: string,
+}

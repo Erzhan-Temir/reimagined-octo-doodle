@@ -17,4 +17,5 @@ export type State = {
   readonly isLoading: boolean,
   readonly offers: Offer[],
   readonly currentCity: string,
+  readonly sorting: string,
 }
