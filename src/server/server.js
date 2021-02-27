@@ -15,7 +15,7 @@ const makeServer = ({environment = `development`} = {}) => {
         price: 120,
         isBookmarked: false,
         rating: 93,
-        heading: `Beautiful &amp; luxurious apartment at great location`,
+        heading: `Beautiful & luxurious apartment at great location`,
         type: `Apartment`,
       });
       server.create(`offer`, {

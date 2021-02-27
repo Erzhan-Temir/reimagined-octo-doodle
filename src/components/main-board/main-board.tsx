@@ -1,17 +1,20 @@
+/* eslint-disable no-undef */
 import React, {useEffect} from 'react';
 import Sorting from '../sorting/sorting';
 import PlaceCardList from '../place-card-list/place-card-list';
 import MapMain from '../map-main/map-main';
+import {Offer} from '../../types/offers';
 
 type Props = {
-  offers: object[],
+  offers: Offer[],
   fetchOffers: () => Promise<[]>,
 }
 
-const MainBoard = (props: Props) => {
+const MainBoard = (props: Props): JSX.Element => {
+  const {offers, fetchOffers} = props;
 
   useEffect(() => {
-    props.fetchOffers();
+    fetchOffers();
   }, []);
 
   return (
@@ -21,7 +24,7 @@ const MainBoard = (props: Props) => {
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">312 places to stay in Amsterdam</b>
           <Sorting />
-          <PlaceCardList />
+          <PlaceCardList offers={offers} />
         </section>
         <MapMain />
       </div>

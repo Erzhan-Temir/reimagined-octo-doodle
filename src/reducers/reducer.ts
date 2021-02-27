@@ -21,6 +21,7 @@ export const reducer = (state: State = initialState, action: Action) => {
       });
     case `FETCH_OFFERS_SUCCESS`:
       return Object.assign({}, state, {
+        isLoading: false,
         offers: action.payload,
       });
     default:
@@ -43,9 +44,9 @@ export const ActionsCreator = {
 };
 
 export const Operations = {
-  fetchOffers: () => () => (dispatch: Dispatch)=> {
+  fetchOffers: () => () => (dispatch: Dispatch) => {
     dispatch(ActionsCreator.fetchOffers());
     API.getOffers()
-      .then((response) => dispatch(ActionsCreator.fetchOffersSuccess(response.data.tasks)));
+      .then((response) => dispatch(ActionsCreator.fetchOffersSuccess(response.data.offers)));
   }
 };

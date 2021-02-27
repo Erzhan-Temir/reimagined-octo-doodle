@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Diff} from 'utility-types';
 import {ConnectedProps, connect} from 'react-redux';
 import {State} from '../types/offers';
 import {bindActionCreators, Dispatch} from 'redux';
 import {Operations} from '../reducers/reducer';
+import {Offer} from '../types/offers';
 
 const mapStateToProps = (state: State) => {
   return {
@@ -22,13 +22,14 @@ export const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type InjectedProps = {
   isLoading: boolean;
-  offers: object[];
+  offers: Offer[];
   fetchOffers: () => Promise<[]>;
 };
 
 type HocComponentProps = InjectedProps;
 
 type ReduxProps = ConnectedProps<typeof connector>;
+
 
 export const withReduxConnect = <BaseProps extends HocComponentProps>(BaseComponent: React.ComponentType<BaseProps>) => {
   type HocProps = BaseProps & ReduxProps;
@@ -44,6 +45,7 @@ export const withReduxConnect = <BaseProps extends HocComponentProps>(BaseCompon
       );
     }
   }
+
 
   const ConnectedHoc = connector(WithReduxConnect as any);
   return ConnectedHoc;
