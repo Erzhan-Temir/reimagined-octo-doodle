@@ -134,7 +134,6 @@ const PlaceCardList = () => {
         </div>
       </article>
     </div>
-
   );
 };
 

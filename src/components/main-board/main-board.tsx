@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Sorting from '../sorting/sorting';
 import PlaceCardList from '../place-card-list/place-card-list';
 import MapMain from '../map-main/map-main';
 
-const MainBoard = () => {
+type Props = {
+  offers: object[],
+  fetchOffers: () => Promise<[]>,
+}
+
+const MainBoard = (props: Props) => {
+
+  useEffect(() => {
+    props.fetchOffers();
+  }, []);
+
   return (
     <div className="cities">
       <div className="cities__places-container container">
