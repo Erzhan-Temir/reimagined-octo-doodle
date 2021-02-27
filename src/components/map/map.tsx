@@ -1,10 +1,12 @@
 import React, {useRef, useEffect} from 'react';
 import L from 'leaflet';
 import {Offer} from '../../types/offers';
+import {cities} from '../../constants/constants';
 import './map.css';
 
 type Props = {
   offers: Offer[],
+  currentCity: string,
 };
 
 const pin = L.icon({
@@ -18,14 +20,15 @@ const pin = L.icon({
 // });
 
 const Map = (props: Props): JSX.Element => {
-  const {offers} = props;
+  const {offers, currentCity} = props;
 
   const mapRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let map: any;
 
   const createMap = () => {
-    const cityCoords = new L.LatLng(52.38333, 4.9);
+    const city = cities[currentCity];
+    const cityCoords = new L.LatLng(city.LAT, city.LNG);
     const zoom = 12;
 
     map = L.map(mapRef.current, {
@@ -51,7 +54,7 @@ const Map = (props: Props): JSX.Element => {
     createMap();
 
     return () => map.remove();
-  }, []);
+  }, [currentCity]);
 
 
   return (

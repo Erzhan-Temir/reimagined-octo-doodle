@@ -8,11 +8,12 @@ import {Offer} from '../../types/offers';
 type Props = {
   isLoading: boolean,
   offers: Offer[],
+  currentCity: string,
   fetchOffers: () => Promise<[]>,
 }
 
 const MainBoard = (props: Props): JSX.Element => {
-  const {isLoading, offers, fetchOffers} = props;
+  const {isLoading, offers, currentCity, fetchOffers} = props;
   useEffect(() => {
     fetchOffers();
   }, []);
@@ -26,11 +27,11 @@ const MainBoard = (props: Props): JSX.Element => {
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">312 places to stay in Amsterdam</b>
+          <b className="places__found">312 places to stay in {currentCity}</b>
           <Sorting />
           <PlaceCardList offers={offers} />
         </section>
-        <MapMain offers={offers} />
+        <MapMain offers={offers} currentCity={currentCity} />
       </div>
     </div>
   );

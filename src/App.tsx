@@ -3,8 +3,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {reducer} from './reducers/reducer';
 import thunk from 'redux-thunk';
-import Header from './components/header/header';
-import PageMainBoard from './components/page-main-board/page-main-board';
+import PageMain from './components/page-main/page-main';
 import PageDetails from './components/page-details/page-details';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 
@@ -14,14 +13,6 @@ const store = createStore(reducer, applyMiddleware(thunk));
 // https://github.com/Alisa-Filatova/Six-cities/tree/master/src/components/page-wrapper
 // https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
 
-const PageMain = (): JSX.Element => {
-  return (
-    <div className="page page--gray page--main">
-      <Header />
-      <PageMainBoard />
-    </div>
-  );
-};
 
 const App = (): JSX.Element => {
   return (

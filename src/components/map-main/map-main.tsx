@@ -4,13 +4,17 @@ import {Offer} from '../../types/offers';
 
 type Props = {
   offers: Offer[],
+  currentCity: string,
 };
 
 const MapMain = (props: Props): JSX.Element => {
+
+  const {offers, currentCity} = props;
+
   return (
     <div className="cities__right-section">
       <section className="cities__map map">
-        <Map offers={props.offers}/>
+        <Map offers={offers} currentCity={currentCity} />
       </section>
     </div>
   );

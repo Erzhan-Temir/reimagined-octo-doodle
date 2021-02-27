@@ -1,40 +1,39 @@
 import React from 'react';
+import {citiesNameList} from '../../constants/constants';
+import TabsItem from '../tabs-item/tabs-item';
+import classNames from 'classnames';
+import {ChangeCity} from '../../types/actions';
 
-const Tabs = (): JSX.Element => {
+type Props = {
+  currentCity: string,
+  changeCity: (city: string) => ChangeCity,
+};
+
+const Tabs = (props: Props): JSX.Element => {
+  const {currentCity, changeCity} = props;
+  const activeLinkClass = `tabs__item--active`;
+
+
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Paris</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Cologne</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Brussels</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item tabs__item--active">
-              <span>Amsterdam</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Hamburg</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Dusseldorf</span>
-            </a>
-          </li>
+
+          {
+            citiesNameList.map((city) => {
+              return (
+                <TabsItem
+                  key={city}
+                  cityName={city}
+                  classList={classNames(`locations__item-link tabs__item`, {
+                    [activeLinkClass]: currentCity === city,
+                  })}
+                  changeCity={changeCity}
+                />
+              );
+            })
+          }
+
         </ul>
       </section>
     </div>

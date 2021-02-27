@@ -1,10 +1,7 @@
-type itemCoords = {
-  LAT: number;
-  LNG: number;
-};
+import {itemCoords} from './utils';
 
 export type Offer = {
-  readonly id: string;
+  readonly id?: string;
   readonly isPremium: boolean;
   readonly image: string;
   readonly city: string;
@@ -19,4 +16,5 @@ export type Offer = {
 export type State = {
   readonly isLoading: boolean,
   readonly offers: Offer[],
-};
+  readonly currentCity: string,
+}
