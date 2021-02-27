@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tabs = () => {
+const Tabs = (): JSX.Element => {
   return (
     <div className="tabs">
       <section className="locations container">

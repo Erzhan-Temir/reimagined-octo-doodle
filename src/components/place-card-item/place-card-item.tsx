@@ -1,11 +1,13 @@
 import React from 'react';
 import {Offer} from '../../types/offers';
+import {withRouter} from 'react-router-dom';
+import {RouteComponentProps} from 'react-router';
 
-type Props = {
+interface Props extends RouteComponentProps {
   offer: Offer;
 }
 
-const PlaceCardItem = (props: Props): JSX.Element => {
+const PlaceCardItem = (props: Props) => {
 
   const {
     offer: {
@@ -27,6 +29,11 @@ const PlaceCardItem = (props: Props): JSX.Element => {
   );
 
   const bookmarkActiveClass = `place-card__bookmark-button--active`;
+
+  const onPlaceCardNameClick = (evt: React.SyntheticEvent) => {
+    evt.preventDefault();
+    props.history.push(`/${id}`);
+  };
 
   return (
     <article className="cities__place-card place-card">
@@ -64,7 +71,9 @@ const PlaceCardItem = (props: Props): JSX.Element => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{heading}</a>
+          <a
+            onClick={onPlaceCardNameClick}
+          >{heading}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -72,4 +81,4 @@ const PlaceCardItem = (props: Props): JSX.Element => {
   );
 };
 
-export default PlaceCardItem;
+export default withRouter(PlaceCardItem);

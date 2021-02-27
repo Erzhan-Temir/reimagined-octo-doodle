@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {State} from '../types/offers';
 import API from '../services/api';
-import {ActionCreator, AnyAction, Dispatch} from 'redux';
-import {ThunkAction} from 'redux-thunk';
+import {Dispatch} from 'redux';
 
 type Action = {
   type: string,

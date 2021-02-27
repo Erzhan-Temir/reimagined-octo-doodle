@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MapMain = () => {
+const MapMain = (): JSX.Element => {
   return (
     <div className="cities__right-section">
       <section className="cities__map map"></section>

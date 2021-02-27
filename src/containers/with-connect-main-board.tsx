@@ -31,6 +31,7 @@ type HocComponentProps = InjectedProps;
 type ReduxProps = ConnectedProps<typeof connector>;
 
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const withReduxConnect = <BaseProps extends HocComponentProps>(BaseComponent: React.ComponentType<BaseProps>) => {
   type HocProps = BaseProps & ReduxProps;
 
@@ -40,13 +41,15 @@ export const withReduxConnect = <BaseProps extends HocComponentProps>(BaseCompon
 
     render() {
       const {...restProps} = this.props;
+
       return (
-        <BaseComponent {...restProps} />
+        <BaseComponent {...(restProps as BaseProps)} />
       );
     }
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ConnectedHoc = connector(WithReduxConnect as any);
   return ConnectedHoc;
 };

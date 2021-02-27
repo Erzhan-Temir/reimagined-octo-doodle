@@ -6,16 +6,20 @@ import MapMain from '../map-main/map-main';
 import {Offer} from '../../types/offers';
 
 type Props = {
+  isLoading: boolean,
   offers: Offer[],
   fetchOffers: () => Promise<[]>,
 }
 
 const MainBoard = (props: Props): JSX.Element => {
-  const {offers, fetchOffers} = props;
-
+  const {isLoading, offers, fetchOffers} = props;
   useEffect(() => {
     fetchOffers();
   }, []);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="cities">
