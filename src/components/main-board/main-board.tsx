@@ -30,7 +30,7 @@ const MainBoard = (props: Props): JSX.Element => {
           <Sorting />
           <PlaceCardList offers={offers} />
         </section>
-        <MapMain />
+        <MapMain offers={offers} />
       </div>
     </div>
   );

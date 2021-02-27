@@ -1,5 +1,18 @@
 import {Server, Model} from 'miragejs';
 
+const cityCoords = {
+  LAT: 52.38333,
+  LNG: 4.9,
+};
+
+const getRandomCoords = () => {
+  return {
+    LAT: cityCoords.LAT + Math.random() / 20,
+    LNG: cityCoords.LNG + Math.random() / 20
+  };
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const makeServer = ({environment = `development`} = {}) => {
   return new Server({
     environment,
@@ -12,6 +25,8 @@ const makeServer = ({environment = `development`} = {}) => {
       server.create(`offer`, {
         isPremium: true,
         image: `img/apartment-01.jpg`,
+        city: `Amsterdam`,
+        coords: getRandomCoords(),
         price: 120,
         isBookmarked: false,
         rating: 93,
@@ -21,6 +36,8 @@ const makeServer = ({environment = `development`} = {}) => {
       server.create(`offer`, {
         isPremium: false,
         image: `img/room.jpg`,
+        city: `Amsterdam`,
+        coords: getRandomCoords(),
         price: 80,
         isBookmarked: true,
         rating: 80,
@@ -30,6 +47,8 @@ const makeServer = ({environment = `development`} = {}) => {
       server.create(`offer`, {
         isPremium: false,
         image: `img/apartment-02.jpg`,
+        city: `Amsterdam`,
+        coords: getRandomCoords(),
         price: 132,
         isBookmarked: false,
         rating: 80,
@@ -39,6 +58,8 @@ const makeServer = ({environment = `development`} = {}) => {
       server.create(`offer`, {
         isPremium: true,
         image: `img/apartment-03.jpg`,
+        city: `Amsterdam`,
+        coords: getRandomCoords(),
         price: 180,
         isBookmarked: false,
         rating: 100,

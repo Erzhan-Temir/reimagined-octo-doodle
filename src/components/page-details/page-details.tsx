@@ -7,6 +7,7 @@ type RouteParams = {
   id: string
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PageDetails = (props: RouteComponentProps<RouteParams>): JSX.Element => {
   return (
     <div className="page">
