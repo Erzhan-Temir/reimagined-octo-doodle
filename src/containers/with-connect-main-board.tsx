@@ -5,7 +5,7 @@ import {bindActionCreators, Dispatch} from 'redux';
 import {Operations, ActionsCreator} from '../reducers/reducer';
 import {Offer} from '../types/offers';
 import filterSelector from '../selectors/selectors';
-import {ChangeSorting} from '../types/actions';
+import {ChangeSorting, SetActiveOffer} from '../types/actions';
 
 const mapStateToProps = (state: State) => {
   return {
@@ -13,6 +13,7 @@ const mapStateToProps = (state: State) => {
     offers: filterSelector(state),
     currentCity: state.currentCity,
     sorting: state.sorting,
+    activeOfferId: state.activeOfferId,
   };
 };
 
@@ -20,6 +21,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return bindActionCreators({
     fetchOffers: Operations.fetchOffers(),
     changeSorting: ActionsCreator.changeSorting,
+    setActiveOffer: ActionsCreator.setActiveOffer,
   }, dispatch);
 };
 
@@ -30,8 +32,10 @@ type InjectedProps = {
   offers: Offer[];
   currentCity: string;
   sorting: string;
+  activeOfferId: null|string;
   fetchOffers: () => Promise<[]>;
-  changeSorting: () => ChangeSorting;
+  changeSorting: (sorting: string) => ChangeSorting;
+  setActiveOffer: (id: null|string|undefined) => SetActiveOffer;
 };
 
 type HocComponentProps = InjectedProps;

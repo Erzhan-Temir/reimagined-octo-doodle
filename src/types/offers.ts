@@ -18,4 +18,5 @@ export type State = {
   readonly offers: Offer[],
   readonly currentCity: string,
   readonly sorting: string,
+  readonly activeOfferId: null | string,
 }

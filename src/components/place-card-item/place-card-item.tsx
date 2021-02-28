@@ -2,14 +2,17 @@ import React from 'react';
 import {Offer} from '../../types/offers';
 import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router';
+import {SetActiveOffer} from '../../types/actions';
 
 interface Props extends RouteComponentProps {
   offer: Offer;
+  setActiveOffer: (id: null|string|undefined) => SetActiveOffer,
 }
 
 const PlaceCardItem = (props: Props) => {
 
   const {
+    setActiveOffer,
     offer: {
       id,
       isPremium,
@@ -35,8 +38,21 @@ const PlaceCardItem = (props: Props) => {
     props.history.push(`/${id}`);
   };
 
+  const handleMouseHoverEnter = (): void => {
+    setActiveOffer(id);
+  };
+
+  const handleMouseHoverLeave = (): void => {
+    setActiveOffer(null);
+  };
+
   return (
-    <article className="cities__place-card place-card">
+    <article
+      onMouseEnter={handleMouseHoverEnter}
+      onMouseLeave={handleMouseHoverLeave}
+      className="cities__place-card place-card"
+    >
+
       {
         isPremium ? premiumBadge : ``
       }

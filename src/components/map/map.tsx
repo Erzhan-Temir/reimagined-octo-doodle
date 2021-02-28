@@ -7,6 +7,7 @@ import './map.css';
 type Props = {
   offers: Offer[],
   currentCity: string,
+  activeOfferId: null|string,
 };
 
 const pin = L.icon({
@@ -14,13 +15,13 @@ const pin = L.icon({
   iconSize: [27, 39],
 });
 
-// const activePin = L.icon({
-//   iconUrl: '/img/pin-active.svg',
-//   iconSize: [30, 42],
-// });
+const activePin = L.icon({
+  iconUrl: '/img/pin-active.svg',
+  iconSize: [30, 42],
+});
 
 const Map = (props: Props): JSX.Element => {
-  const {offers, currentCity} = props;
+  const {offers, currentCity, activeOfferId} = props;
 
   const mapRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,7 +44,18 @@ const Map = (props: Props): JSX.Element => {
     })
       .addTo(map);
 
-    offers.map((offer) => {
+    const offersCopy = offers.slice();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const activeOffer: any = offersCopy.find((offer) => offer.id === activeOfferId);
+    const indexOfActiveOffer = offersCopy.indexOf(activeOffer);
+
+    if (indexOfActiveOffer > -1) {
+      offersCopy.splice(indexOfActiveOffer, 1);
+      const offerCoords = new L.LatLng(activeOffer.coords.LAT, activeOffer.coords.LNG);
+      L.marker(offerCoords, {icon: activePin}).addTo(map);
+    }
+
+    offersCopy.map((offer) => {
       const offerCoords = new L.LatLng(offer.coords.LAT, offer.coords.LNG);
       L.marker(offerCoords, {icon: pin}).addTo(map);
     });
@@ -54,7 +66,7 @@ const Map = (props: Props): JSX.Element => {
     createMap();
 
     return () => map.remove();
-  }, [currentCity]);
+  }, [currentCity, activeOfferId]);
 
 
   return (

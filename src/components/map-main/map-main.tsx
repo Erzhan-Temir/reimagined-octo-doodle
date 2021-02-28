@@ -5,16 +5,17 @@ import {Offer} from '../../types/offers';
 type Props = {
   offers: Offer[],
   currentCity: string,
+  activeOfferId: null|string,
 };
 
 const MapMain = (props: Props): JSX.Element => {
 
-  const {offers, currentCity} = props;
+  const {offers, currentCity, activeOfferId} = props;
 
   return (
     <div className="cities__right-section">
       <section className="cities__map map">
-        <Map offers={offers} currentCity={currentCity} />
+        <Map offers={offers} currentCity={currentCity} activeOfferId={activeOfferId} />
       </section>
     </div>
   );
