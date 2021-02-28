@@ -1,5 +1,5 @@
 import {cities, citiesNameList} from '../constants/constants';
-import {Offer} from '../types/offers';
+import {Offer} from '../types/offers-data';
 
 const headings = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
 const offerTypes = [`Apartment`, `Private room`];

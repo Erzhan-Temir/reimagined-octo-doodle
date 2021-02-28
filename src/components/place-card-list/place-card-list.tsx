@@ -1,11 +1,11 @@
 import React from 'react';
 import PlaceCardItem from '../place-card-item/place-card-item';
-import {Offer} from '../../types/offers';
-import {SetActiveOffer} from '../../types/actions';
+import {Offer} from '../../types/offers-data';
+import {ActionType} from '../../reducers/offers-data/offers-data';
 
 type Props = {
   offers: Offer[],
-  setActiveOffer: (id: null|string|undefined) => SetActiveOffer,
+  setActiveOffer: (id: null|string|undefined) => ActionType,
 }
 
 const PlaceCardList = (props: Props): JSX.Element => {

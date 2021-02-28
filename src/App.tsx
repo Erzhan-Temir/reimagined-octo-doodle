@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {reducer} from './reducers/reducer';
+import {rootReducer} from './reducers/root-reducer';
 import thunk from 'redux-thunk';
 import PageMain from './components/page-main/page-main';
 import PageDetails from './components/page-details/page-details';
@@ -10,7 +10,7 @@ import PageLogIn from './components/page-log-in/page-log-in';
 import PageFavorites from './components/page-favorites/page-favorites';
 import {withReduxConnectLogIn} from './containers/with-connect-sign-in';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const PageLogInWrapped = withReduxConnectLogIn(PageLogIn);
 
@@ -18,6 +18,15 @@ const PageLogInWrapped = withReduxConnectLogIn(PageLogIn);
 // https://github.com/Alisa-Filatova/Six-cities/tree/master/src/components/page-wrapper
 // https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
 
+// interface PropsTest {
+//   offer: Offer;
+//   setActiveOffer: (id: null | string | undefined) => SetActiveOffer,
+// }
+// type Props = {
+//   offers: Offer[],
+//   setActiveOffer: (id: null|string|undefined) => SetActiveOffer,
+// }
+// const PlaceCardItemWrapped: React.ComponentType<PropsTest> = withReduxConnectHeader(PlaceCardItem);
 
 const App = (): JSX.Element => {
   return (

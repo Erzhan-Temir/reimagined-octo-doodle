@@ -6,15 +6,15 @@ import LogInBoard from '../log-in-board/log-in-board';
 
 type Props = {
   isLoggedIn: boolean;
-  isLoginFormDisabled: boolean;
-  logIn: (email: string) => Promise<string>;
+  pendingAuthorization: boolean;
+  login: (email: string) => Promise<string>;
 };
 
 const HeaderWrapped = withReduxConnectHeader(Header);
 
 const PageLogIn = (props: Props): JSX.Element => {
 
-  const {isLoggedIn, isLoginFormDisabled, logIn} = props;
+  const {isLoggedIn, pendingAuthorization, login} = props;
 
   if (isLoggedIn) {
     return <Redirect to="/favorites" />;
@@ -25,7 +25,7 @@ const PageLogIn = (props: Props): JSX.Element => {
 
       <HeaderWrapped />
 
-      <LogInBoard logIn={logIn} isLoginFormDisabled={isLoginFormDisabled} />
+      <LogInBoard login={login} pendingAuthorization={pendingAuthorization} />
     </div>
   );
 };

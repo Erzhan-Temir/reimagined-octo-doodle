@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react';
 import L from 'leaflet';
-import {Offer} from '../../types/offers';
+import {Offer} from '../../types/offers-data';
 import {cities} from '../../constants/constants';
 import './map.css';
 

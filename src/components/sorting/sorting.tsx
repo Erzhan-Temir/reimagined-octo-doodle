@@ -1,10 +1,10 @@
 import React from 'react';
 import {sorting} from '../../constants/constants';
-import {ChangeSorting} from '../../types/actions';
+import {ActionType} from '../../reducers/offers-data/offers-data';
 
 type Props = {
   currentSorting: string,
-  changeSorting: (sorting: string) => ChangeSorting,
+  changeSorting: (sorting: string) => ActionType,
 };
 
 const Sorting = (props: Props): JSX.Element => {

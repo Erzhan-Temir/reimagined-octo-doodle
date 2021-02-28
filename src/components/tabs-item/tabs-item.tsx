@@ -1,10 +1,10 @@
 import React from 'react';
-import {ChangeCity} from '../../types/actions';
+import {ActionType} from '../../reducers/offers-data/offers-data';
 
 type Props = {
   cityName: string,
   classList: string,
-  changeCity: (city: string) => ChangeCity,
+  changeCity: (city: string) => ActionType,
 };
 
 const TabsItem = (props: Props): JSX.Element => {

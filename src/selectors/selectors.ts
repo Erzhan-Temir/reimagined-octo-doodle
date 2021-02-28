@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {State} from '../types/offers';
+import {State} from '../types/offers-data';
 
 const offersSelector = (state: State) => state.offers;
 const getCurrentCitySelector = (state: State) => state.currentCity;

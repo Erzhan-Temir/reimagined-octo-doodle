@@ -1,6 +1,6 @@
 import React from 'react';
 import Map from '../map/map';
-import {Offer} from '../../types/offers';
+import {Offer} from '../../types/offers-data';
 
 type Props = {
   offers: Offer[],

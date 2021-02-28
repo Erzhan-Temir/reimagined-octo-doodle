@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import Sorting from '../sorting/sorting';
 import PlaceCardList from '../place-card-list/place-card-list';
 import MapMain from '../map-main/map-main';
-import {Offer} from '../../types/offers';
-import {ChangeSorting, SetActiveOffer} from '../../types/actions';
+import {Offer} from '../../types/offers-data';
+import {ActionType} from '../../reducers/offers-data/offers-data';
 import LoadingStub from '../loading-stub/loading-stub';
 
 type Props = {
@@ -13,8 +13,8 @@ type Props = {
   sorting: string,
   activeOfferId: null|string,
   fetchOffers: () => Promise<[]>,
-  changeSorting: (sorting: string) => ChangeSorting,
-  setActiveOffer: (id: null|string|undefined) => SetActiveOffer,
+  changeSorting: (sorting: string) => ActionType,
+  setActiveOffer: (id: null|string|undefined) => ActionType,
 }
 
 const MainBoard = (props: Props): JSX.Element => {

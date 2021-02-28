@@ -2,11 +2,11 @@ import React from 'react';
 import {citiesNameList} from '../../constants/constants';
 import TabsItem from '../tabs-item/tabs-item';
 import classNames from 'classnames';
-import {ChangeCity} from '../../types/actions';
+import {ActionType} from '../../reducers/offers-data/offers-data';
 
 type Props = {
   currentCity: string,
-  changeCity: (city: string) => ChangeCity,
+  changeCity: (city: string) => ActionType,
 };
 
 const Tabs = (props: Props): JSX.Element => {

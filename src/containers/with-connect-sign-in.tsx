@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {ConnectedProps, connect} from 'react-redux';
-import {State} from '../types/offers';
 import {bindActionCreators, Dispatch} from 'redux';
-import {Operations} from '../reducers/reducer';
+import {Operations} from '../reducers/user/user';
+import {RootState} from '../reducers/root-reducer';
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: RootState) => {
   return {
-    isLoggedIn: state.isLoggedIn,
-    isLoginFormDisabled: state.isLoginFormDisabled,
+    isLoggedIn: state.user.isLoggedIn,
+    pendingAuthorization: state.user.pendingAuthorization,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return bindActionCreators({
-    logIn: Operations.logIn(),
+    login: Operations.login(),
   }, dispatch);
 };
 
@@ -21,7 +21,8 @@ export const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type InjectedProps = {
   isLoggedIn: boolean;
-  logIn: (email: string) => Promise<string>;
+  pendingAuthorization: boolean,
+  login: (email: string) => Promise<string>;
 };
 
 type HocComponentProps = InjectedProps;

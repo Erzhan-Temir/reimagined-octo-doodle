@@ -8,17 +8,17 @@ type FormData = {
 };
 
 type Props = {
-  isLoginFormDisabled: boolean;
-  logIn: (email: string) => Promise<string>;
+  pendingAuthorization: boolean;
+  login: (email: string) => Promise<string>;
 }
 
 const LogInBoard = (props: Props): JSX.Element => {
-  const {isLoginFormDisabled, logIn} = props;
+  const {pendingAuthorization, login} = props;
 
   const {register, handleSubmit} = useForm<FormData>();
 
   const onSubmit = handleSubmit(({email}) => {
-    logIn(email);
+    login(email);
   });
 
   return (
@@ -32,7 +32,7 @@ const LogInBoard = (props: Props): JSX.Element => {
             action="#"
             method="post"
           >
-            <fieldset disabled={isLoginFormDisabled}>
+            <fieldset disabled={!pendingAuthorization}>
 
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>

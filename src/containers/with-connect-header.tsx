@@ -1,16 +1,19 @@
 import * as React from 'react';
 import {ConnectedProps, connect} from 'react-redux';
-import {State, UserInfo} from '../types/offers';
+import {RootState} from '../reducers/root-reducer';
+import {UserInfo} from '../types/user-reducer';
 
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: RootState) => {
   return {
-    isLoggedIn: state.isLoggedIn,
-    userInfo: state.userInfo,
+    isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
   };
 };
 
+
 export const connector = connect(mapStateToProps);
+
 
 type InjectedProps = {
   isLoggedIn: boolean;

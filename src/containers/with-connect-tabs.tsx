@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {ConnectedProps, connect} from 'react-redux';
-import {State} from '../types/offers';
 import {bindActionCreators, Dispatch} from 'redux';
-import {ActionsCreator} from '../reducers/reducer';
-import {ChangeCity} from '../types/actions';
+import {ActionsCreator} from '../reducers/offers-data/offers-data';
+import {ActionType} from '../reducers/offers-data/offers-data';
+import {RootState} from '../reducers/root-reducer';
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = ({offersData}: RootState) => {
   return {
-    currentCity: state.currentCity,
+    currentCity: offersData.currentCity,
   };
 };
 
@@ -21,7 +21,7 @@ export const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type InjectedProps = {
   currentCity: string;
-  changeCity: () => ChangeCity;
+  changeCity: () => ActionType;
 };
 
 type HocComponentProps = InjectedProps;

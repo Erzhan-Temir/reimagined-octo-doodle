@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {ConnectedProps, connect} from 'react-redux';
-import {State} from '../types/offers';
 import {bindActionCreators, Dispatch} from 'redux';
-import {Operations, ActionsCreator} from '../reducers/reducer';
-import {Offer} from '../types/offers';
+import {Operations, ActionsCreator} from '../reducers/offers-data/offers-data';
+import {Offer} from '../types/offers-data';
 import filterSelector from '../selectors/selectors';
-import {ChangeSorting, SetActiveOffer} from '../types/actions';
+import {ActionType} from '../reducers/offers-data/offers-data';
+import {RootState} from '../reducers/root-reducer';
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = ({offersData}: RootState) => {
   return {
-    isLoading: state.isLoading,
-    offers: filterSelector(state),
-    currentCity: state.currentCity,
-    sorting: state.sorting,
-    activeOfferId: state.activeOfferId,
+    isLoading: offersData.isLoading,
+    offers: filterSelector(offersData),
+    currentCity: offersData.currentCity,
+    sorting: offersData.sorting,
+    activeOfferId: offersData.activeOfferId,
   };
 };
 
@@ -34,8 +34,8 @@ type InjectedProps = {
   sorting: string;
   activeOfferId: null|string;
   fetchOffers: () => Promise<[]>;
-  changeSorting: (sorting: string) => ChangeSorting;
-  setActiveOffer: (id: null|string|undefined) => SetActiveOffer;
+  changeSorting: (sorting: string) => ActionType;
+  setActiveOffer: (id: null|string|undefined) => ActionType;
 };
 
 type HocComponentProps = InjectedProps;

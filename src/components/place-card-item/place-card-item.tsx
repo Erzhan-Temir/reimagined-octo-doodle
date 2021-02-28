@@ -1,12 +1,12 @@
 import React from 'react';
-import {Offer} from '../../types/offers';
+import {Offer} from '../../types/offers-data';
 import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router';
-import {SetActiveOffer} from '../../types/actions';
+import {ActionType} from '../../reducers/offers-data/offers-data';
 
 interface Props extends RouteComponentProps {
   offer: Offer;
-  setActiveOffer: (id: null|string|undefined) => SetActiveOffer,
+  setActiveOffer: (id: null|string|undefined) => ActionType,
 }
 
 const PlaceCardItem = (props: Props) => {

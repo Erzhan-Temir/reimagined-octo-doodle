@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {UserInfo} from '../../types/offers';
+import {UserInfo} from '../../types/user-reducer';
 
 type Props = {
   isLoggedIn: boolean;

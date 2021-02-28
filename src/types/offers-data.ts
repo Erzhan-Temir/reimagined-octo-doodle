@@ -18,13 +18,18 @@ export type UserInfo = {
   bookmarkedIds: null|string[],
 }
 
-export type State = {
+export type State = { // Del
   readonly isLoading: boolean,
   readonly offers: Offer[],
   readonly currentCity: string,
   readonly sorting: string,
   readonly activeOfferId: null | string,
-  readonly isLoggedIn: boolean,
-  readonly userInfo: UserInfo,
-  readonly isLoginFormDisabled: boolean,
+}
+
+export interface OffersDataState {
+  readonly isLoading: boolean,
+  readonly offers: Offer[],
+  readonly currentCity: string,
+  readonly sorting: string,
+  readonly activeOfferId: null | string,
 }
