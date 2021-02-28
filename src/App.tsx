@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import PageMain from './components/page-main/page-main';
 import PageDetails from './components/page-details/page-details';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import PageLogIn from './components/page-log-in/page-log-in';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -20,7 +21,9 @@ const App = (): JSX.Element => {
       <Provider store={store}>
         <Switch>
           <Route exact path="/" component={PageMain} />
+          <Route exact path="/login" component={PageLogIn} />
           <Route
+            exact
             path="/:id"
             component={PageDetails}
           />

@@ -16,6 +16,11 @@ const initialState: State = {
   currentCity: citiesNameList[0],
   sorting: sorting["Popular"],
   activeOfferId: null,
+  isLoggedIn: false,
+  userInfo: {
+    email: null,
+    bookmarkedIds: null,
+  },
 };
 
 export const reducer = (state: State = initialState, action: Action) => {
