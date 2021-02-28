@@ -26,4 +26,5 @@ export type State = {
   readonly activeOfferId: null | string,
   readonly isLoggedIn: boolean,
   readonly userInfo: UserInfo,
+  readonly isLoginFormDisabled: boolean,
 }

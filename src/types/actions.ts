@@ -12,3 +12,8 @@ export interface SetActiveOffer {
   type: string,
   payload: string
 }
+
+export interface FetchLogInSuccess {
+  type: string,
+  payload: string
+}

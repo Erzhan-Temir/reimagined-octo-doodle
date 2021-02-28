@@ -4,6 +4,7 @@ import PlaceCardList from '../place-card-list/place-card-list';
 import MapMain from '../map-main/map-main';
 import {Offer} from '../../types/offers';
 import {ChangeSorting, SetActiveOffer} from '../../types/actions';
+import LoadingStub from '../loading-stub/loading-stub';
 
 type Props = {
   isLoading: boolean,
@@ -24,7 +25,7 @@ const MainBoard = (props: Props): JSX.Element => {
   }, []);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingStub />;
   }
 
   return (

@@ -1,27 +1,27 @@
 import * as React from 'react';
 import {ConnectedProps, connect} from 'react-redux';
-import {State, UserInfo} from '../types/offers';
-// import {bindActionCreators, Dispatch} from 'redux';
-// import {ActionsCreator} from '../reducers/reducer';
-// import {ChangeCity} from '../types/actions';
+import {State} from '../types/offers';
+import {bindActionCreators, Dispatch} from 'redux';
+import {Operations} from '../reducers/reducer';
 
 const mapStateToProps = (state: State) => {
   return {
-    userInfo: state.userInfo,
+    isLoggedIn: state.isLoggedIn,
+    isLoginFormDisabled: state.isLoginFormDisabled,
   };
 };
 
-// const mapDispatchToProps = (dispatch: Dispatch) => {
-//   return bindActionCreators({
-//     changeCity: ActionsCreator.changeCity,
-//   }, dispatch);
-// };
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return bindActionCreators({
+    logIn: Operations.logIn(),
+  }, dispatch);
+};
 
-export const connector = connect(mapStateToProps);
+export const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type InjectedProps = {
-  userInfo: UserInfo;
-  // changeCity: () => ChangeCity;
+  isLoggedIn: boolean;
+  logIn: (email: string) => Promise<string>;
 };
 
 type HocComponentProps = InjectedProps;
@@ -30,7 +30,7 @@ type ReduxProps = ConnectedProps<typeof connector>;
 
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const withReduxConnectUserInfo = <BaseProps extends HocComponentProps>(BaseComponent: React.ComponentType<BaseProps>) => {
+export const withReduxConnectLogIn = <BaseProps extends HocComponentProps>(BaseComponent: React.ComponentType<BaseProps>) => {
   type HocProps = BaseProps & ReduxProps;
 
   class WithReduxConnect extends React.Component<HocProps> {
