@@ -8,25 +8,12 @@ import PageDetails from './components/page-details/page-details';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PageLogIn from './components/page-log-in/page-log-in';
 import PageFavorites from './components/page-favorites/page-favorites';
-import {withReduxConnectLogIn} from './containers/with-connect-sign-in';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-
-const PageLogInWrapped = withReduxConnectLogIn(PageLogIn);
 
 // https://github.com/piotrwitek/react-redux-typescript-guide/blob/e0532ae099a1ddcce7cf263280e20714c7a53e72/playground/src/hoc/with-connected-count.tsx#L13
 // https://github.com/Alisa-Filatova/Six-cities/tree/master/src/components/page-wrapper
 // https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
-
-// interface PropsTest {
-//   offer: Offer;
-//   setActiveOffer: (id: null | string | undefined) => SetActiveOffer,
-// }
-// type Props = {
-//   offers: Offer[],
-//   setActiveOffer: (id: null|string|undefined) => SetActiveOffer,
-// }
-// const PlaceCardItemWrapped: React.ComponentType<PropsTest> = withReduxConnectHeader(PlaceCardItem);
 
 const App = (): JSX.Element => {
   return (
@@ -34,7 +21,7 @@ const App = (): JSX.Element => {
       <Provider store={store}>
         <Switch>
           <Route exact path="/" component={PageMain} />
-          <Route exact path="/login" component={PageLogInWrapped} />
+          <Route exact path="/login" component={PageLogIn} />
           <Route exact path="/favorites" component={PageFavorites} />
           <Route
             exact

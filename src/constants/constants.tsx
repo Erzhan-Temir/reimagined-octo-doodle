@@ -27,7 +27,7 @@ export const cities: CitiesDictionary = {
   },
 };
 
-export const sorting: SortingDictionary = {
+export const sortingData: SortingDictionary = {
   "Popular": `popular`,
   "Price: low to high": `to-high`,
   "Price: high to low": `to-low`,

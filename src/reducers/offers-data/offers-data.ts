@@ -1,14 +1,14 @@
 import {Offer, OffersDataState} from '../../types/offers-data';
 import API from '../../services/api';
 import {Dispatch} from 'redux';
-import {citiesNameList, sorting} from '../../constants/constants';
+import {citiesNameList, sortingData} from '../../constants/constants';
 // import {ChangeCity, ChangeSorting, SetActiveOffer} from '../types/actions';
 
 const initialState: OffersDataState = {
   isLoading: true,
   offers: [],
   currentCity: citiesNameList[0],
-  sorting: sorting["Popular"],
+  sorting: sortingData["Popular"],
   activeOfferId: null,
 };
 
@@ -81,7 +81,7 @@ export const offersDataReducer = (state: OffersDataState = initialState, action:
     case UserAction.CHANGE_CITY:
       return Object.assign({}, state, {
         currentCity: action.payload,
-        sorting: sorting["Popular"],
+        sorting: sortingData["Popular"],
       });
     case UserAction.CHANGE_SORTING:
       return Object.assign({}, state, {

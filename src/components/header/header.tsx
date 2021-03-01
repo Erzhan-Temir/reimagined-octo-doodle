@@ -1,11 +1,14 @@
 import React from 'react';
+import {compose} from 'redux';
 import {Link} from 'react-router-dom';
+import {withUserInfo} from '../../hocs/with-user-info';
 import {UserInfo} from '../../types/user-reducer';
+import {withLoginInfo} from '../../hocs/with-login-info';
 
-type Props = {
+interface Props {
   isLoggedIn: boolean;
   userInfo: UserInfo;
-};
+}
 
 
 const Header = (props: Props): JSX.Element => {
@@ -49,4 +52,4 @@ const Header = (props: Props): JSX.Element => {
   );
 };
 
-export default Header;
+export default compose<React.FunctionComponent>(withLoginInfo, withUserInfo)(Header);

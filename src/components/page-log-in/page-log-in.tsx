@@ -1,16 +1,17 @@
 import React from 'react';
+import {compose} from 'redux';
 import {Redirect} from 'react-router';
-import {withReduxConnectHeader} from '../../containers/with-connect-header';
 import Header from '../header/header';
 import LogInBoard from '../log-in-board/log-in-board';
+import {withAuthorization} from '../../hocs/with-authorization';
+import {withLoginInfo} from '../../hocs/with-login-info';
 
-type Props = {
+interface Props {
   isLoggedIn: boolean;
   pendingAuthorization: boolean;
   login: (email: string) => Promise<string>;
-};
+}
 
-const HeaderWrapped = withReduxConnectHeader(Header);
 
 const PageLogIn = (props: Props): JSX.Element => {
 
@@ -23,7 +24,7 @@ const PageLogIn = (props: Props): JSX.Element => {
   return (
     <div className="page page--gray page--login">
 
-      <HeaderWrapped />
+      <Header />
 
       <LogInBoard login={login} pendingAuthorization={pendingAuthorization} />
     </div>
@@ -31,4 +32,4 @@ const PageLogIn = (props: Props): JSX.Element => {
 };
 
 
-export default PageLogIn;
+export default compose<React.FunctionComponent>(withLoginInfo, withAuthorization)(PageLogIn);

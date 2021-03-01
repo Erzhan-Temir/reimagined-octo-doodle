@@ -1,12 +1,16 @@
 import React from 'react';
+import {compose} from 'redux';
 import Map from '../map/map';
 import {Offer} from '../../types/offers-data';
+import {withActiveOfferId} from '../../hocs/with-active-offer-id';
+import {withCurrentCity} from '../../hocs/with-current-city';
+import {withOffers} from '../../hocs/with-offers';
 
-type Props = {
+interface Props {
   offers: Offer[],
   currentCity: string,
   activeOfferId: null|string,
-};
+}
 
 const MapMain = (props: Props): JSX.Element => {
 
@@ -21,4 +25,4 @@ const MapMain = (props: Props): JSX.Element => {
   );
 };
 
-export default MapMain;
+export default compose<React.FunctionComponent>(withActiveOfferId, withCurrentCity, withOffers)(MapMain);

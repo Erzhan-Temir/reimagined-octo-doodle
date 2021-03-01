@@ -1,15 +1,17 @@
 import React from 'react';
-import {sorting} from '../../constants/constants';
 import {ActionType} from '../../reducers/offers-data/offers-data';
+import {withSorting} from '../../hocs/with-sorting';
+import {sortingData} from '../../constants/constants';
 
-type Props = {
-  currentSorting: string,
+interface Props {
+  sorting: string,
   changeSorting: (sorting: string) => ActionType,
-};
+}
 
 const Sorting = (props: Props): JSX.Element => {
-  const {currentSorting, changeSorting} = props;
-  const sortingEntries = Object.entries(sorting);
+
+  const {sorting, changeSorting} = props;
+  const sortingEntries = Object.entries(sortingData);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -19,7 +21,7 @@ const Sorting = (props: Props): JSX.Element => {
         onChange={(evt) => changeSorting(evt.target.value)}
         className="places__sorting-type"
         id="places-sorting"
-        value={currentSorting}
+        value={sorting}
       >
 
         {
@@ -43,4 +45,4 @@ const Sorting = (props: Props): JSX.Element => {
   );
 };
 
-export default Sorting;
+export default withSorting(Sorting);

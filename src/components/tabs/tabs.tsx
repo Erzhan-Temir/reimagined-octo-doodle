@@ -1,13 +1,18 @@
 import React from 'react';
+import {compose} from 'redux';
 import {citiesNameList} from '../../constants/constants';
 import TabsItem from '../tabs-item/tabs-item';
 import classNames from 'classnames';
 import {ActionType} from '../../reducers/offers-data/offers-data';
+import {withChangeCity} from '../../hocs/with-change-city';
+import {withCurrentCity} from '../../hocs/with-current-city';
 
-type Props = {
+
+interface Props {
   currentCity: string,
   changeCity: (city: string) => ActionType,
-};
+}
+
 
 const Tabs = (props: Props): JSX.Element => {
   const {currentCity, changeCity} = props;
@@ -40,4 +45,4 @@ const Tabs = (props: Props): JSX.Element => {
   );
 };
 
-export default Tabs;
+export default compose<React.FunctionComponent>(withCurrentCity, withChangeCity)(Tabs);

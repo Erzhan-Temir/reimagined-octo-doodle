@@ -1,14 +1,12 @@
 import React from 'react';
-import {withReduxConnectHeader} from '../../containers/with-connect-header';
 import Header from '../header/header';
 
-const HeaderWrapped = withReduxConnectHeader(Header);
 
 const PageFavorites = (): JSX.Element => {
   return (
     <div className="page page--favorites-empty">
 
-      <HeaderWrapped />
+      <Header />
 
       <main className="page__main page__main--favorites page__main--favorites-empty">
         <div className="page__favorites-container container">
