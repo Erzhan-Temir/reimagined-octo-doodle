@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from 'axios';
 
 import {makeServer} from '../server/server';
@@ -10,11 +11,15 @@ const API = {
     timeout: 2000,
     headers: {"Content-type": `application/json`}
   }),
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
   getOffers() {
     return this.base.get(`/offers`);
   },
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
+  getOffer(id) {
+    return this.base.get(`/offers/${id}`);
+  },
+
   login(email) {
     return this.base.post(`/users`, {
       email: {email}

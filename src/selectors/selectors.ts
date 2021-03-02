@@ -1,9 +1,9 @@
 import {createSelector} from 'reselect';
-import {State} from '../types/offers-data';
+import {OffersDataState} from '../types/offers-data';
 
-const offersSelector = (state: State) => state.offers;
-const getCurrentCitySelector = (state: State) => state.currentCity;
-const getSortingSelector = (state: State) => state.sorting;
+const offersSelector = (state: OffersDataState) => state.offers;
+const getCurrentCitySelector = (state: OffersDataState) => state.currentCity;
+const getSortingSelector = (state: OffersDataState) => state.sorting;
 
 const filterSelector = createSelector(
     [offersSelector, getCurrentCitySelector],

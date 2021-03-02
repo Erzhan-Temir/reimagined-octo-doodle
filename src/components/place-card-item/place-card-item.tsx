@@ -6,7 +6,7 @@ import {ActionType} from '../../reducers/offers-data/offers-data';
 
 interface Props extends RouteComponentProps {
   offer: Offer;
-  setActiveOffer: (id: null|string|undefined) => ActionType,
+  setActiveOffer: (id: null | string | undefined) => ActionType,
 }
 
 const PlaceCardItem = (props: Props) => {
@@ -25,7 +25,7 @@ const PlaceCardItem = (props: Props) => {
     }
   } = props;
 
-  const premiumBadge: JSX.Element = (
+  const premiumBadge = (
     <div className="place-card__mark">
       <span>Premium</span>
     </div>

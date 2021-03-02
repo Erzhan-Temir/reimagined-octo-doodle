@@ -1,5 +1,7 @@
 import {Server, Model} from 'miragejs';
 import getRandomOffer from '../mocks/offer';
+import getRandomReview from '../mocks/review';
+import {OFFERS_COUNT, REVIEWS_COUNT} from '../mocks/utils';
 
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -10,11 +12,16 @@ export const makeServer = ({environment = `development`} = {}) => {
     models: {
       offers: Model,
       users: Model,
+      reviews: Model,
     },
 
     seeds(server) {
-      for (let offerIndex = 0; offerIndex < 20; offerIndex++) {
-        server.create(`offer`, getRandomOffer());
+      for (let offerIndex = 0; offerIndex < OFFERS_COUNT; offerIndex++) {
+        server.schema.offers.create(getRandomOffer());
+      }
+
+      for (let reviewIndex = 0; reviewIndex < REVIEWS_COUNT; reviewIndex++) {
+        server.schema.reviews.create(getRandomReview());
       }
     },
 
@@ -24,6 +31,15 @@ export const makeServer = ({environment = `development`} = {}) => {
 
       this.get(`/offers`, (schema) => {
         return schema.offers.all();
+      });
+
+      this.get(`/offers/:id`, (schema, request) => {
+        let id = request.params.id;
+        return schema.offers.find(id);
+      });
+
+      this.get(`/reviews`, (schema) => {
+        return schema.reviews.all();
       });
 
       this.post(

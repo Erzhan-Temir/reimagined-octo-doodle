@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {compose} from 'redux';
 import Sorting from '../sorting/sorting';
 import PlaceCardList from '../place-card-list/place-card-list';
-import MapMain from '../map-main/map-main';
+import Map from '../map/map';
 import {Offer} from '../../types/offers-data';
 import LoadingStub from '../loading-stub/loading-stub';
 import {withLoadData} from '../../hocs/with-load-data';
@@ -44,7 +44,11 @@ const MainBoard = (props: Props): JSX.Element => {
             <Sorting />
             <PlaceCardList />
           </section>
-          <MapMain />
+          <div className="cities__right-section">
+            <section className="cities__map map">
+              <Map />
+            </section>
+          </div>
         </div>
       </div>
 

@@ -1,8 +1,12 @@
 import React, {useRef, useEffect} from 'react';
+import {compose} from 'redux';
 import L from 'leaflet';
 import {Offer} from '../../types/offers-data';
 import {cities} from '../../constants/constants';
 import './map.css';
+import {withActiveOfferId} from '../../hocs/with-active-offer-id';
+import {withCurrentCity} from '../../hocs/with-current-city';
+import {withOffers} from '../../hocs/with-offers';
 
 type Props = {
   offers: Offer[],
@@ -74,4 +78,4 @@ const Map = (props: Props): JSX.Element => {
   );
 };
 
-export default Map;
+export default compose<React.FunctionComponent>(withActiveOfferId, withCurrentCity, withOffers)(Map);

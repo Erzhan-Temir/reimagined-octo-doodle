@@ -1,8 +1,12 @@
 import {cities, citiesNameList} from '../constants/constants';
 import {Offer} from '../types/offers-data';
+import {names, REVIEWS_COUNT} from './utils';
 
 const headings = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
-const offerTypes = [`Apartment`, `Private room`];
+const offerTypes = [`Apartment`, `Private room`, `Entire place`];
+const features = [`Wi-Fi`, `Heating`, `Kitchen`, `Fridge`, `Washing machine`, `Coffee machine`, `Dishwasher`, `Towels`, `Baby seat`, `Cabel TV`];
+
+const ratings = [`Pro`, `Landlord`, `Agency`];
 
 const getRandomCoords = (city: string) => {
   return {
@@ -32,6 +36,17 @@ const getRandomOffer = (): Offer => {
     rating: getRandomIntegerNumber(60, 100),
     heading: getRandomArrItem(headings),
     type: getRandomArrItem(offerTypes),
+    reviewIDs: [getRandomIntegerNumber(1, REVIEWS_COUNT), getRandomIntegerNumber(1, REVIEWS_COUNT)],
+    details: {
+      bedrooms: getRandomIntegerNumber(1, 5),
+      occupation: getRandomIntegerNumber(1, 6),
+      features,
+      host: {
+        name: getRandomArrItem(names),
+        avatar: `https://placeimg.com/74/74/people`,
+        rating: getRandomArrItem(ratings),
+      }
+    }
   };
 };
 

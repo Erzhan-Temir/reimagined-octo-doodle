@@ -4,7 +4,7 @@
   width: 180px;
   height: 180px;
   margin-top: 200px;
-  margin-left: 550px;
+  margin-left: 45%;
 }
 .lds-roller div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
