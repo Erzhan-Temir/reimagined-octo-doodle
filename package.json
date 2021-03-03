@@ -17,6 +17,7 @@
     "@types/react-router-dom": "5.1.7",
     "axios": "0.21.1",
     "classnames": "2.2.6",
+    "dayjs": "1.10.4",
     "leaflet": "1.7.1",
     "miragejs": "0.1.41",
     "react": "^17.0.1",

@@ -20,6 +20,10 @@ const API = {
     return this.base.get(`/offers/${id}`);
   },
 
+  getReviews() {
+    return this.base.get(`/reviews`);
+  },
+
   login(email) {
     return this.base.post(`/users`, {
       email: {email}

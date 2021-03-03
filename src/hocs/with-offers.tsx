@@ -2,7 +2,7 @@
 import React, {FunctionComponent, ComponentType} from 'react';
 import {ConnectedProps, connect} from 'react-redux';
 import {RootState} from '../reducers/root-reducer';
-import filterSelector from '../selectors/selectors';
+import filterSelector from '../selectors/offer-selector';
 import {Offer} from '../types/offers-data';
 
 
