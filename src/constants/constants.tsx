@@ -35,3 +35,26 @@ export const sortingData: SortingDictionary = {
 };
 
 export const citiesNameList = Object.keys(cities);
+
+export const ratingStars = [
+  {
+    name: `5-stars`,
+    value: 5
+  },
+  {
+    name: `4-stars`,
+    value: 4
+  },
+  {
+    name: `3-stars`,
+    value: 3
+  },
+  {
+    name: `2-stars`,
+    value: 2
+  },
+  {
+    name: `1-star`,
+    value: 1
+  }
+];

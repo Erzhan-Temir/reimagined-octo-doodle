@@ -2,7 +2,7 @@ import React from 'react';
 import {compose} from 'redux';
 import {Link} from 'react-router-dom';
 import {withUserInfo} from '../../hocs/with-user-info';
-import {UserInfo} from '../../types/user-reducer';
+import {UserInfo} from '../../types/user-data';
 import {withLoginInfo} from '../../hocs/with-login-info';
 
 interface Props {

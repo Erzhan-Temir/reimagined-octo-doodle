@@ -10,5 +10,5 @@ export interface Review {
 export interface ReviewState {
   readonly isLoading: boolean;
   readonly reviewsList: Review[];
-  readonly currentReviewsID: number[];
+  readonly currentReviewsID: string[];
 }

@@ -22,13 +22,8 @@ export type Offer = {
   readonly rating: number;
   readonly heading: string;
   readonly type: string;
-  readonly reviewIDs: number[];
+  readonly reviewIDs: string[];
   readonly details: Details;
-}
-
-export type UserInfo = {
-  email: null | string,
-  bookmarkedIds: null | string[],
 }
 
 export interface OffersDataState {

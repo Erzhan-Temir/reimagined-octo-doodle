@@ -8,7 +8,7 @@ const getCurrentReviewIDs = (state: ReviewState) => state.currentReviewsID;
 const filterSelector = createSelector(
     [reviewsSelector, getCurrentReviewIDs],
     (reviewsList, currentReviewsID) => {
-      return reviewsList.filter((review) => currentReviewsID.some((id) => id === +review.id!));
+      return reviewsList.filter((review) => currentReviewsID.some((id) => id === review.id!));
     }
 );
 

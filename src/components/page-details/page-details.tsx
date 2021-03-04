@@ -25,7 +25,6 @@ const PageDetails = (props: RouteComponentProps<RouteParams> & InjectedProps) =>
 
   const {
     isLoading,
-    offer,
     fetchOffer,
     removeOfferFromState} = props;
 
@@ -39,7 +38,7 @@ const PageDetails = (props: RouteComponentProps<RouteParams> & InjectedProps) =>
   return (
     <div className="page">
       <Header />
-      {isLoading ? <LoadingStub /> : <PageDetailsBoard offer={offer} />}
+      {isLoading ? <LoadingStub /> : <PageDetailsBoard />}
     </div>
   );
 };

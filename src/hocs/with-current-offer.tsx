@@ -2,31 +2,30 @@
 import React, {FunctionComponent, ComponentType} from 'react';
 import {ConnectedProps, connect} from 'react-redux';
 import {RootState} from '../reducers/root-reducer';
-import {UserInfo} from '../types/user-data';
+import {Offer} from '../types/offers-data';
+
 
 interface InjectedProps {
-  userInfo: UserInfo;
+  offer: Offer;
 }
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = ({offersData}: RootState) => {
   return {
-    userInfo: state.user.userInfo,
+    offer: offersData.offer,
   };
 };
 
 export const connector = connect(mapStateToProps);
 
-
 type ReduxProps = ConnectedProps<typeof connector>;
 
+export const withCurrentOffer = <BaseProps extends InjectedProps>(BaseComponent: ComponentType<BaseProps>): FunctionComponent => {
 
-export const withUserInfo = <BaseProps extends InjectedProps>(BaseComponent: ComponentType<BaseProps>): FunctionComponent => {
-
-  const WithUserInfo: FunctionComponent<BaseProps & ReduxProps> = (props) => {
+  const WithCurrentOffer: FunctionComponent<BaseProps & ReduxProps> = (props) => {
     return (
       <BaseComponent {...(props as BaseProps)} />
     );
   };
 
-  return connector(WithUserInfo as any);
+  return connector(WithCurrentOffer as any);
 };

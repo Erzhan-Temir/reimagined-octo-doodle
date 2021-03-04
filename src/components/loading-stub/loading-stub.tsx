@@ -3,7 +3,9 @@ import './loading-stub.css';
 
 const LoadingStub = (): JSX.Element => {
   return (
-    <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div>
+      <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
   );
 };
 

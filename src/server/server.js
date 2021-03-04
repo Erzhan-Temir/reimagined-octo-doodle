@@ -42,14 +42,23 @@ export const makeServer = ({environment = `development`} = {}) => {
         return schema.reviews.all();
       });
 
-      this.post(
-          `/users`,
-          (schema, request) => {
-            let attrs = JSON.parse(request.requestBody).email;
-            return schema.users.create(attrs);
-          },
-          {timing: 1000}
+      this.post(`/users`, (schema, request) => {
+        let attrs = JSON.parse(request.requestBody).email;
+        return schema.users.create(attrs);
+      }, {timing: 1000}
       );
+
+      this.post(`/reviews`, (schema, request) => {
+        let attrs = JSON.parse(request.requestBody).review;
+        return schema.reviews.create(attrs);
+      }, {timing: 1000}
+      );
+
+      this.patch(`/offers/:id`, (schema, request) => {
+        let attrs = JSON.parse(request.requestBody).offer;
+
+        return schema.offers.find(request.params.id).update(attrs);
+      });
     }
   });
 };

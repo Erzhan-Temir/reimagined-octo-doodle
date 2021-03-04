@@ -36,7 +36,7 @@ const getRandomOffer = (): Offer => {
     rating: getRandomIntegerNumber(60, 100),
     heading: getRandomArrItem(headings),
     type: getRandomArrItem(offerTypes),
-    reviewIDs: [getRandomIntegerNumber(1, REVIEWS_COUNT), getRandomIntegerNumber(1, REVIEWS_COUNT)],
+    reviewIDs: [(getRandomIntegerNumber(1, REVIEWS_COUNT)).toString(), (getRandomIntegerNumber(1, REVIEWS_COUNT)).toString()],
     details: {
       bedrooms: getRandomIntegerNumber(1, 5),
       occupation: getRandomIntegerNumber(1, 6),

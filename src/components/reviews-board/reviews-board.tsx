@@ -6,26 +6,25 @@ import {Review} from '../../types/review-data';
 import LoadingStub from '../loading-stub/loading-stub';
 import ReviewItem from '../review-item/review-item';
 import ReviewAddForm from '../review-add-form/review-add-form';
-
-interface InjectedProps {
-  reviewIDs: number[];
-}
+import {withCurrentOffer} from '../../hocs/with-current-offer';
+import {Offer} from '../../types/offers-data';
 
 interface Props {
   isLoading: boolean;
   isLoggedIn: boolean;
   reviewsList: Review[];
-  setCurrentReviewsID: (reviewIDs: number[]) => void;
+  offer: Offer;
+  setCurrentReviewsID: (reviewIDs: string[]) => void;
   fetchReviews: () => void;
 }
 
-const ReviewsBoard = (props: Props & InjectedProps): JSX.Element => {
-  const {isLoading, isLoggedIn, reviewsList, setCurrentReviewsID, fetchReviews, reviewIDs} = props;
+const ReviewsBoard = (props: Props): JSX.Element => {
+  const {isLoading, isLoggedIn, reviewsList, offer, setCurrentReviewsID, fetchReviews} = props;
 
   useEffect(() => {
-    setCurrentReviewsID(reviewIDs);
+    setCurrentReviewsID(offer.reviewIDs);
     fetchReviews();
-  }, [reviewIDs]);
+  }, [offer]);
 
 
   if (isLoading) {
@@ -49,4 +48,4 @@ const ReviewsBoard = (props: Props & InjectedProps): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent<InjectedProps>>(withReviews, withLoginInfo)(ReviewsBoard);
+export default compose<React.FunctionComponent>(withReviews, withLoginInfo, withCurrentOffer)(ReviewsBoard);

@@ -24,6 +24,18 @@ const API = {
     return this.base.get(`/reviews`);
   },
 
+  addReview(review) {
+    return this.base.post(`/reviews`, {
+      review
+    });
+  },
+
+  updateOffer(id, offer) {
+    return this.base.patch(`/offers/${id}`, {
+      offer
+    });
+  },
+
   login(email) {
     return this.base.post(`/users`, {
       email: {email}

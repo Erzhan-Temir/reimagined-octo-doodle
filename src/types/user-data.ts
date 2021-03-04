@@ -1,6 +1,6 @@
 export interface UserInfo {
-  email: null|string,
-  bookmarkedIds: null|string[],
+  email: string,
+  bookmarkedIds: string[],
 }
 
 export interface UserState {

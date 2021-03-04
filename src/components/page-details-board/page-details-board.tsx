@@ -4,6 +4,7 @@ import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
 import ReviewsBoard from '../reviews-board/reviews-board';
 import {Offer} from '../../types/offers-data';
+import {withCurrentOffer} from '../../hocs/with-current-offer';
 
 interface Props {
   offer: Offer;
@@ -22,7 +23,6 @@ const PageDetailsBoard = (props: Props) => {
     rating,
     heading,
     type,
-    reviewIDs,
     details: {
       bedrooms,
       occupation,
@@ -145,7 +145,7 @@ const PageDetailsBoard = (props: Props) => {
               </div>
             </div>
 
-            <ReviewsBoard reviewIDs={reviewIDs} />
+            <ReviewsBoard />
 
           </div>
         </div>
@@ -165,4 +165,4 @@ const PageDetailsBoard = (props: Props) => {
   );
 };
 
-export default PageDetailsBoard;
+export default withCurrentOffer(PageDetailsBoard);

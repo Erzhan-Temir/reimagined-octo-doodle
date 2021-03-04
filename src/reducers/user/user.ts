@@ -1,4 +1,4 @@
-import {UserState} from '../../types/user-reducer';
+import {UserState} from '../../types/user-data';
 import {Dispatch} from 'redux';
 import API from '../../services/api';
 
@@ -6,8 +6,8 @@ const initialState: UserState = {
   isLoggedIn: false,
   pendingAuthorization: true,
   userInfo: {
-    email: null,
-    bookmarkedIds: null,
+    email: ``,
+    bookmarkedIds: [],
   },
 };
 
@@ -62,6 +62,7 @@ export const userReducer = (state: UserState = initialState, action: ActionType)
         isLoggedIn: true,
         userInfo: {
           email: action.payload,
+          bookmarkedIds: state.userInfo.bookmarkedIds
         }
       });
       break;
