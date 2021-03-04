@@ -29,18 +29,22 @@ export const makeServer = ({environment = `development`} = {}) => {
       this.namespace = `api`;
       this.timing = 1000;
 
+
       this.get(`/offers`, (schema) => {
         return schema.offers.all();
       });
+
 
       this.get(`/offers/:id`, (schema, request) => {
         let id = request.params.id;
         return schema.offers.find(id);
       });
 
+
       this.get(`/reviews`, (schema) => {
         return schema.reviews.all();
       });
+
 
       this.post(`/users`, (schema, request) => {
         let attrs = JSON.parse(request.requestBody).email;
@@ -48,11 +52,13 @@ export const makeServer = ({environment = `development`} = {}) => {
       }, {timing: 1000}
       );
 
+
       this.post(`/reviews`, (schema, request) => {
         let attrs = JSON.parse(request.requestBody).review;
         return schema.reviews.create(attrs);
       }, {timing: 1000}
       );
+
 
       this.patch(`/offers/:id`, (schema, request) => {
         let attrs = JSON.parse(request.requestBody).offer;

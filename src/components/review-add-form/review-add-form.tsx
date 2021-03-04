@@ -6,7 +6,6 @@ import RatingStar from '../rating-star/rating-star';
 import {ActionType} from '../../reducers/reviews/reviews';
 import {withCurrentOffer} from '../../hocs/with-current-offer';
 import {Offer} from '../../types/offers-data';
-import {Review} from '../../types/review-data';
 import {withUserInfo} from '../../hocs/with-user-info';
 import {UserInfo} from '../../types/user-data';
 
@@ -14,20 +13,14 @@ interface Props {
   currentOfferId: string;
   offer: Offer;
   userInfo: UserInfo;
-  addReview: (newReview: Review, offer: Offer) => ActionType;
+  addReview: (newReviewData: {
+    text: string,
+    rating: number,
+    author: string,
+  }, offer: Offer) => ActionType;
 }
 
 const ReviewAddForm = (props: Props): JSX.Element => {
-
-  const createReview = (commentText: string, rating: number, author: string) => { // ref
-    return {
-      avatar: `../img/avatar.svg`,
-      author,
-      text: commentText,
-      date: (new Date()).toString(),
-      rating: rating * 100 / 5,
-    };
-  };
 
   const {addReview, offer, userInfo} = props;
 
@@ -37,9 +30,11 @@ const ReviewAddForm = (props: Props): JSX.Element => {
   const handleSubmit = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
 
-    const newReview = createReview(commentText, rating, userInfo.email);
-
-    addReview(newReview, offer);
+    addReview({
+      text: commentText,
+      rating,
+      author: userInfo.email,
+    }, offer);
   };
 
   return (

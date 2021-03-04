@@ -7,6 +7,8 @@ export interface Review {
   rating: number;
 }
 
+export type ReviewIDs = number[];
+
 export interface ReviewState {
   readonly isLoading: boolean;
   readonly reviewsList: Review[];

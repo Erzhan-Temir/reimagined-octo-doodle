@@ -3,14 +3,18 @@ import React, {FunctionComponent, ComponentType} from 'react';
 import {ConnectedProps, connect} from 'react-redux';
 import {Operations, ActionType} from '../reducers/reviews/reviews';
 import {bindActionCreators, Dispatch} from 'redux';
-import {Review} from '../types/review-data';
+// import {Review} from '../types/review-data';
 import {Offer} from '../types/offers-data';
 // import {RootState} from '../reducers/root-reducer';
 
 
 interface InjectedProps {
   currentOfferId: string;
-  addReview: (newReview: Review, offer: Offer) => ActionType;
+  addReview: (newReviewData: {
+    commentText: string,
+    rating: number,
+    author: string,
+  }, offer: Offer) => ActionType;
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Dispatch} from 'redux';
-import {Review, ReviewState} from '../../types/review-data';
+import {Review, ReviewIDs, ReviewState} from '../../types/review-data';
 import API from '../../services/api';
 import {Offer} from '../../types/offers-data';
 import {ActionsCreator as OfferActionsCreator} from '../offers-data/offers-data';
@@ -20,7 +20,7 @@ enum UserAction {
 
 export interface ActionType {
   type: UserAction,
-  payload: Review[] | Review | number[] | null,
+  payload: Review[] | Review | ReviewIDs | null,
 }
 
 export const ActionsCreator = {
@@ -30,18 +30,21 @@ export const ActionsCreator = {
       payload: null,
     };
   },
+
   fetchReviewsSuccess: (reviews: Review[]): ActionType => {
     return {
       type: UserAction.FETCH_REVIEWS_SUCCESS,
       payload: reviews,
     };
   },
-  setCurrentReviewsID: (reviewIDs: number[]): ActionType => {
+
+  setCurrentReviewsID: (reviewIDs: ReviewIDs): ActionType => {
     return {
       type: UserAction.SET_CURRENT_REVIEWS_ID,
       payload: reviewIDs,
     };
   },
+
   addReview: (review: Review): ActionType => {
     return {
       type: UserAction.ADD_REVIEW,
@@ -50,15 +53,27 @@ export const ActionsCreator = {
   },
 };
 
+
+const createReview = (commentText: string, rating: number, author: string) => {
+  return {
+    avatar: `../img/avatar.svg`,
+    author,
+    text: commentText,
+    date: (new Date()).toString(),
+    rating: rating * 100 / 5,
+  };
+};
+
+
 export const Operations = {
   fetchReviews: () => () => (dispatch: Dispatch): void => {
     dispatch(ActionsCreator.fetchReviews());
     API.getReviews()
       .then((response) => dispatch(ActionsCreator.fetchReviewsSuccess(response.data.reviews)));
   },
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  addReview: () => (newReview: Review, offer: Offer) => (dispatch: any): void => {
-    API.addReview(newReview)
+
+  addReview: () => ({text, rating, author}: Review, offer: Offer) => (dispatch: Dispatch): void => {
+    API.addReview(createReview(text, rating, author))
       .then((response) => {
         dispatch(ActionsCreator.addReview(response.data.reviews));
         return response.data.reviews;

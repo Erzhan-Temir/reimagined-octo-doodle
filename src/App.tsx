@@ -15,7 +15,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 // https://github.com/Alisa-Filatova/Six-cities/tree/master/src/components/page-wrapper
 // https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
 
-// arr of reviewIDs to string
+// new review length limit
 
 const App = (): JSX.Element => {
   return (

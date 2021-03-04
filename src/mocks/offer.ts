@@ -1,12 +1,10 @@
 import {cities, citiesNameList} from '../constants/constants';
 import {Offer} from '../types/offers-data';
-import {names, REVIEWS_COUNT} from './utils';
+import {
+  names, REVIEWS_COUNT, headings, offerTypes, ratings, features,
+  getRandomIntegerNumber, getRandomArrItem
+} from './utils';
 
-const headings = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
-const offerTypes = [`Apartment`, `Private room`, `Entire place`];
-const features = [`Wi-Fi`, `Heating`, `Kitchen`, `Fridge`, `Washing machine`, `Coffee machine`, `Dishwasher`, `Towels`, `Baby seat`, `Cabel TV`];
-
-const ratings = [`Pro`, `Landlord`, `Agency`];
 
 const getRandomCoords = (city: string) => {
   return {
@@ -15,13 +13,6 @@ const getRandomCoords = (city: string) => {
   };
 };
 
-const getRandomIntegerNumber = (min: number, max: number): number => {
-  return min + Math.floor(Math.random() * (max - min));
-};
-
-const getRandomArrItem = (arr: string[]): string => {
-  return arr[getRandomIntegerNumber(0, arr.length)];
-};
 
 const getRandomOffer = (): Offer => {
   const city = getRandomArrItem(citiesNameList);
