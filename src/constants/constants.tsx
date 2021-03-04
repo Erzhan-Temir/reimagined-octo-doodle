@@ -1,4 +1,4 @@
-import {CitiesDictionary, SortingDictionary} from '../types/utils';
+import {CitiesDictionary, FavoriteButtonDictionary, SortingDictionary} from '../types/utils';
 
 export const cities: CitiesDictionary = {
   "Amsterdam": {
@@ -58,3 +58,19 @@ export const ratingStars = [
     value: 1
   }
 ];
+
+export const favoriteButtonsNames = {
+  placeCard: `place-card`,
+  pageDetails: `page-details`,
+};
+
+export const favoriteButtonClass: FavoriteButtonDictionary = {
+  [favoriteButtonsNames.placeCard]: {
+    main: `place-card__bookmark-button`,
+    iconSize: 18,
+  },
+  [favoriteButtonsNames.pageDetails]: {
+    main: `property__bookmark-button`,
+    iconSize: 31,
+  },
+};

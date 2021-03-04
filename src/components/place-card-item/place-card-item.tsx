@@ -3,6 +3,8 @@ import {Offer} from '../../types/offers-data';
 import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router';
 import {ActionType} from '../../reducers/offers-data/offers-data';
+import FavoriteButton from '../favorite-button/favorite-button';
+import {favoriteButtonsNames} from '../../constants/constants';
 
 interface Props extends RouteComponentProps {
   offer: Offer;
@@ -30,8 +32,6 @@ const PlaceCardItem = (props: Props) => {
       <span>Premium</span>
     </div>
   );
-
-  const bookmarkActiveClass = `place-card__bookmark-button--active`;
 
   const onPlaceCardNameClick = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
@@ -68,17 +68,9 @@ const PlaceCardItem = (props: Props) => {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className={
-              `place-card__bookmark-button button ${isBookmarked ? bookmarkActiveClass : ``}`
-            }
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+
+          <FavoriteButton isBookmarked={isBookmarked} type={favoriteButtonsNames.placeCard} />
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

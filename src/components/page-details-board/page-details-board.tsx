@@ -5,6 +5,8 @@ import Map from '../map/map';
 import ReviewsBoard from '../reviews-board/reviews-board';
 import {Offer} from '../../types/offers-data';
 import {withCurrentOffer} from '../../hocs/with-current-offer';
+import FavoriteButton from '../favorite-button/favorite-button';
+import {favoriteButtonsNames} from '../../constants/constants';
 
 interface Props {
   offer: Offer;
@@ -19,7 +21,7 @@ const PageDetailsBoard = (props: Props) => {
   const {offer: {
     isPremium,
     price,
-    // isBookmarked,
+    isBookmarked,
     rating,
     heading,
     type,
@@ -76,12 +78,7 @@ const PageDetailsBoard = (props: Props) => {
                 {heading}
               </h1>
 
-              <button className="property__bookmark-button button" type="button">
-                <svg className="property__bookmark-icon" width={31} height={33}>
-                  <use xlinkHref="#icon-bookmark" />
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <FavoriteButton isBookmarked={isBookmarked} type={favoriteButtonsNames.pageDetails} />
 
             </div>
             <div className="property__rating rating">
