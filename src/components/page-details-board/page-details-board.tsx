@@ -21,7 +21,6 @@ const PageDetailsBoard = (props: Props) => {
   const {offer: {
     isPremium,
     price,
-    isBookmarked,
     rating,
     heading,
     type,
@@ -78,7 +77,7 @@ const PageDetailsBoard = (props: Props) => {
                 {heading}
               </h1>
 
-              <FavoriteButton isBookmarked={isBookmarked} type={favoriteButtonsNames.pageDetails} />
+              <FavoriteButton offer={props.offer} type={favoriteButtonsNames.pageDetails} />
 
             </div>
             <div className="property__rating rating">

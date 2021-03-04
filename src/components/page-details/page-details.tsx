@@ -7,6 +7,7 @@ import {withLoadOffer} from '../../hocs/with-load-offer';
 import {Offer} from '../../types/offers-data';
 import {ActionType} from '../../reducers/offers-data/offers-data';
 import LoadingStub from '../loading-stub/loading-stub';
+import LoginNotice from '../log-in-notice/log-in-notice';
 
 type RouteParams = {
   id: string,
@@ -39,6 +40,7 @@ const PageDetails = (props: RouteComponentProps<RouteParams> & InjectedProps) =>
     <div className="page">
       <Header />
       {isLoading ? <LoadingStub /> : <PageDetailsBoard />}
+      <LoginNotice />
     </div>
   );
 };

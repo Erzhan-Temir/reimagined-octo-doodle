@@ -74,3 +74,5 @@ export const favoriteButtonClass: FavoriteButtonDictionary = {
     iconSize: 31,
   },
 };
+
+export const LOGIN_NOTICE_INTERVAL = 10000;

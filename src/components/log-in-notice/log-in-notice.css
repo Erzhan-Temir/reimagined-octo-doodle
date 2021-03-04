@@ -1,0 +1,75 @@
+.login-notice {
+  position: sticky;
+  z-index: 100;
+  bottom: 0;
+  padding: 19px 0;
+  color: #ffffff;
+  background-color: #4481C3;
+}
+
+.login-notice-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-notice-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.login-notice-closed {
+  display: none;
+}
+
+.login-notice-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-notice p {
+  margin: 0;
+  margin-right: 30px;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 400;
+}
+
+.login-notice-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.button-small {
+  padding: 9px 25px;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  color: #080f27;
+  background-color: #ffffff;
+}
+
+.button-close {
+  position: relative;
+  min-width: 17px;
+  min-height: 17px;
+  margin-left: 18px;
+  padding: 0;
+  background-color: transparent;
+}
+
+.button-close::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 17px;
+  height: 17px;
+  background-image: url("icon-cross.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

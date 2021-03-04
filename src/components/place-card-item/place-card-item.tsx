@@ -20,7 +20,6 @@ const PlaceCardItem = (props: Props) => {
       isPremium,
       image,
       price,
-      isBookmarked,
       rating,
       heading,
       type
@@ -69,7 +68,7 @@ const PlaceCardItem = (props: Props) => {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
 
-          <FavoriteButton isBookmarked={isBookmarked} type={favoriteButtonsNames.placeCard} />
+          <FavoriteButton offer={props.offer} type={favoriteButtonsNames.placeCard} />
 
         </div>
         <div className="place-card__rating rating">

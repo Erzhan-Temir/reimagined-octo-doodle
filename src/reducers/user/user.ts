@@ -9,16 +9,19 @@ const initialState: UserState = {
     email: ``,
     bookmarkedIds: [],
   },
+  isLoginNoticeShowed: false,
 };
 
 
 enum UserAction {
   PENDING_AUTHORIZATION = 'PENDING_AUTHORIZATION',
   LOGIN = 'LOGIN',
+  SHOW_LOGIN_NOTICE = 'SHOW_LOGIN_NOTICE',
+  HIDE_LOGIN_NOTICE = 'HIDE_LOGIN_NOTICE',
 }
 
 
-interface ActionType {
+export interface ActionType {
   type: UserAction,
   payload?: string,
 }
@@ -35,7 +38,17 @@ export const ActionsCreator = {
       type: UserAction.LOGIN,
       payload: email,
     };
-  }
+  },
+  showLoginNotice: (): ActionType => {
+    return {
+      type: UserAction.SHOW_LOGIN_NOTICE,
+    };
+  },
+  hideLoginNotice: (): ActionType => {
+    return {
+      type: UserAction.HIDE_LOGIN_NOTICE,
+    };
+  },
 };
 
 
@@ -65,7 +78,14 @@ export const userReducer = (state: UserState = initialState, action: ActionType)
           bookmarkedIds: state.userInfo.bookmarkedIds
         }
       });
-      break;
+    case UserAction.SHOW_LOGIN_NOTICE:
+      return Object.assign({}, state, {
+        isLoginNoticeShowed: true,
+      });
+    case UserAction.HIDE_LOGIN_NOTICE:
+      return Object.assign({}, state, {
+        isLoginNoticeShowed: false,
+      });
     default:
       return state;
   }
