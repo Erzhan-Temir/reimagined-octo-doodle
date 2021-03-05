@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Offer, OffersDataState} from '../../types/offers-data';
 import API from '../../services/api';
 import {Dispatch} from 'redux';
 import {citiesNameList, sortingData} from '../../constants/constants';
-// import {ChangeCity, ChangeSorting, SetActiveOffer} from '../types/actions';
 
 const initialState: OffersDataState = {
   isLoading: true,
@@ -22,6 +23,7 @@ enum UserAction {
   CHANGE_CITY = `CHANGE_CITY`,
   CHANGE_SORTING = `CHANGE_SORTING`,
   SET_ACTIVE_OFFER = `SET_ACTIVE_OFFER`,
+  TOGGLE_BOOKMARKED_BUTTON = `TOGGLE_BOOKMARKED_BUTTON`,
 }
 
 export interface ActionType {
@@ -70,6 +72,12 @@ export const ActionsCreator = {
       payload: id,
     };
   },
+  toggleBookmarkedButton: (id?: string): ActionType => {
+    return {
+      type: UserAction.TOGGLE_BOOKMARKED_BUTTON,
+      payload: id,
+    };
+  },
 };
 
 
@@ -84,6 +92,22 @@ export const Operations = {
     API.getOffer(id)
       .then((response) => dispatch(ActionsCreator.fetchOfferSuccess(response.data.offers)));
   },
+  updateOffers: (id: any, offer: Offer) => (dispatch: Dispatch): void => {
+    dispatch(ActionsCreator.toggleBookmarkedButton(id));
+    const updatedOffer = Object.assign({}, offer, {
+      isBookmarked: !offer.isBookmarked,
+    });
+    API.updateOffer(id, updatedOffer);
+  },
+};
+
+const updateBookmarkedFlagInOffer = (offers: Offer[], id?: any): Offer[] => {
+  const updOfferIndex = offers.findIndex((offer) => offer.id === id);
+  const updatedOffer = Object.assign({}, offers[updOfferIndex], {
+    isBookmarked: !offers[updOfferIndex].isBookmarked,
+  });
+  offers.splice(updOfferIndex, 1, updatedOffer);
+  return offers;
 };
 
 export const offersDataReducer = (state: OffersDataState = initialState, action: ActionType): OffersDataState => {
@@ -121,7 +145,13 @@ export const offersDataReducer = (state: OffersDataState = initialState, action:
         activeOfferId: action.payload,
       });
       break;
+    case UserAction.TOGGLE_BOOKMARKED_BUTTON:
+      return Object.assign({}, state, {
+        offers: updateBookmarkedFlagInOffer(state.offers.slice(), action.payload),
+      });
     default:
       return state;
   }
 };
+
+

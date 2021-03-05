@@ -23,7 +23,7 @@ const getRandomOffer = (): Offer => {
     city,
     coords: getRandomCoords(city),
     price: getRandomIntegerNumber(60, 150),
-    isBookmarked: Math.random() > 0.5,
+    isBookmarked: false,
     rating: getRandomIntegerNumber(60, 100),
     heading: getRandomArrItem(headings),
     type: getRandomArrItem(offerTypes),

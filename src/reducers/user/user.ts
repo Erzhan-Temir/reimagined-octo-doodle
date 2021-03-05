@@ -1,15 +1,20 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {UserState} from '../../types/user-data';
 import {Dispatch} from 'redux';
+import {Operations as OffersDataOperations} from '../offers-data/offers-data';
 import API from '../../services/api';
+import {Offer} from '../../types/offers-data';
 
 const initialState: UserState = {
   isLoggedIn: false,
+  isLoginNoticeShowed: false,
+  isFavoriteButtonDisabled: false,
   pendingAuthorization: true,
   userInfo: {
     email: ``,
     bookmarkedIds: [],
   },
-  isLoginNoticeShowed: false,
 };
 
 
@@ -18,6 +23,7 @@ enum UserAction {
   LOGIN = 'LOGIN',
   SHOW_LOGIN_NOTICE = 'SHOW_LOGIN_NOTICE',
   HIDE_LOGIN_NOTICE = 'HIDE_LOGIN_NOTICE',
+  ADD_TO_BOOKMARKED_IDS = 'ADD_TO_BOOKMARKED_ID',
 }
 
 
@@ -49,6 +55,12 @@ export const ActionsCreator = {
       type: UserAction.HIDE_LOGIN_NOTICE,
     };
   },
+  addToBookmarkedIDs: (id?: string): ActionType => {
+    return {
+      type: UserAction.ADD_TO_BOOKMARKED_IDS,
+      payload: id,
+    };
+  },
 };
 
 
@@ -60,8 +72,21 @@ export const Operations = {
         dispatch(ActionsCreator.login(response.data.users.email));
       });
   },
+  addToBookmarkedIDs: (offer: Offer, id?: string) => (dispatch: any): void => {
+    dispatch(ActionsCreator.addToBookmarkedIDs(id));
+    dispatch(OffersDataOperations.updateOffers(id, offer));
+  },
 };
 
+const addIdToBookmarkedID = (bookMarkedIDs: string[], id: any) => {
+  const indexOfNewId = bookMarkedIDs.indexOf(id);
+  if (indexOfNewId > -1) {
+    bookMarkedIDs.splice(indexOfNewId, 1);
+  } else {
+    bookMarkedIDs.push(id);
+  }
+  return bookMarkedIDs;
+};
 
 export const userReducer = (state: UserState = initialState, action: ActionType): UserState => {
   switch (action.type) {
@@ -85,6 +110,13 @@ export const userReducer = (state: UserState = initialState, action: ActionType)
     case UserAction.HIDE_LOGIN_NOTICE:
       return Object.assign({}, state, {
         isLoginNoticeShowed: false,
+      });
+    case UserAction.ADD_TO_BOOKMARKED_IDS:
+      return Object.assign({}, state, {
+        userInfo: {
+          email: state.userInfo.email,
+          bookmarkedIds: addIdToBookmarkedID(state.userInfo.bookmarkedIds.slice(), action.payload),
+        }
       });
     default:
       return state;

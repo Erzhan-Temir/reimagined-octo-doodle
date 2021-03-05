@@ -1,8 +1,10 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
 import {compose} from 'redux';
 import {favoriteButtonClass} from '../../constants/constants';
 import {withLoginInfo} from '../../hocs/with-login-info';
 import {withLoginNotice} from '../../hocs/with-login-notice';
+import {Operations} from '../../reducers/user/user';
 import {ActionType} from '../../reducers/user/user';
 import {Offer} from '../../types/offers-data';
 
@@ -18,7 +20,10 @@ interface InjectedProps {
 
 const FavoriteButton = (props: Props & InjectedProps): JSX.Element => {
 
-  const {offer: {isBookmarked}, type, isLoggedIn, showLoginNotice} = props;
+  const {offer, type, isLoggedIn, showLoginNotice} = props;
+  const {id, isBookmarked} = offer;
+
+  const dispatch = useDispatch();
 
   const bookmarkActiveClass = `place-card__bookmark-button--active`;
   const classNamesData = favoriteButtonClass[type];
@@ -28,6 +33,8 @@ const FavoriteButton = (props: Props & InjectedProps): JSX.Element => {
       showLoginNotice();
       return;
     }
+
+    dispatch(Operations.addToBookmarkedIDs(offer, id));
   };
 
   return (

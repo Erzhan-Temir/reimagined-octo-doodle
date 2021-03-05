@@ -31,11 +31,13 @@ const LoginNotice = (props: Props) => {
     <section className="login-notice">
       <h2 className="visually-hidden">Log In notification</h2>
       <div className="login-notice-wrapper container">
-        <p>Only authorized user can add favorites and leave comments.</p>
+        <p>Please sign in to add offer to favorites and leave comments.</p>
         <div className="login-notice-buttons">
-          <button type="button" className="button button-small">
-            <Link to="/login">Sign In</Link>
-          </button>
+          <Link to="/login">
+            <button type="button" className="button button-small">
+              Sign In
+            </button>
+          </Link>
           <button
             onClick={() => hideLoginNotice()}
             type="button"
