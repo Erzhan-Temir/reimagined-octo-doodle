@@ -1,4 +1,4 @@
-import {CitiesDictionary, FavoriteButtonDictionary, SortingDictionary} from '../types/utils';
+import {CitiesDictionary, FavoriteButtonDictionary, PlaceCardImageSizeDictionary, SortingDictionary} from '../types/utils';
 
 export const cities: CitiesDictionary = {
   "Amsterdam": {
@@ -34,7 +34,7 @@ export const sortingData: SortingDictionary = {
   "Top rated first": `top-rated`,
 };
 
-export const citiesNameList = Object.keys(cities);
+export const citiesNameList = Object.keys(cities).sort();
 
 export const ratingStars = [
   {
@@ -59,7 +59,7 @@ export const ratingStars = [
   }
 ];
 
-export const favoriteButtonsNames = {
+export const favoriteButtonsNames = { // rename
   placeCard: `place-card`,
   pageDetails: `page-details`,
 };
@@ -72,6 +72,22 @@ export const favoriteButtonClass: FavoriteButtonDictionary = {
   [favoriteButtonsNames.pageDetails]: {
     main: `property__bookmark-button`,
     iconSize: 31,
+  },
+};
+
+export const placeCardImageTypes = {
+  mainBoard: `main-board`,
+  favoriteBoard: `favorite-board`,
+};
+
+export const placeCardImageSize: PlaceCardImageSizeDictionary = {
+  [placeCardImageTypes.mainBoard]: {
+    width: 260,
+    height: 200,
+  },
+  [placeCardImageTypes.favoriteBoard]: {
+    width: 150,
+    height: 110,
   },
 };
 

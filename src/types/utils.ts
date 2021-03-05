@@ -17,3 +17,10 @@ export interface FavoriteButtonDictionary {
     iconSize: number
   }
 }
+
+export interface PlaceCardImageSizeDictionary {
+  [Key: string]: {
+    width: number,
+    height: number,
+  }
+}

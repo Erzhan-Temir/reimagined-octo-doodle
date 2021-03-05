@@ -1,17 +1,16 @@
 import React from 'react';
 import {Offer} from '../../types/offers-data';
-import {withRouter} from 'react-router-dom';
-import {RouteComponentProps} from 'react-router';
 import {ActionType} from '../../reducers/offers-data/offers-data';
-import FavoriteButton from '../favorite-button/favorite-button';
-import {favoriteButtonsNames} from '../../constants/constants';
+import {placeCardImageTypes} from '../../constants/constants';
+import PlaceCardImage from '../place-card-image/place-card-image';
+import PlaceCardDetails from '../place-card-details/place-card-details';
 
-interface Props extends RouteComponentProps {
+interface Props {
   offer: Offer;
   setActiveOffer: (id: null | string | undefined) => ActionType,
 }
 
-const PlaceCardItem = (props: Props) => {
+const PlaceCardItem = (props: Props): JSX.Element => {
 
   const {
     setActiveOffer,
@@ -19,10 +18,6 @@ const PlaceCardItem = (props: Props) => {
       id,
       isPremium,
       image,
-      price,
-      rating,
-      heading,
-      type
     }
   } = props;
 
@@ -31,11 +26,6 @@ const PlaceCardItem = (props: Props) => {
       <span>Premium</span>
     </div>
   );
-
-  const onPlaceCardNameClick = (evt: React.SyntheticEvent) => {
-    evt.preventDefault();
-    props.history.push(`/${id}`);
-  };
 
   const handleMouseHoverEnter = (): void => {
     setActiveOffer(id);
@@ -57,35 +47,17 @@ const PlaceCardItem = (props: Props) => {
       }
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={image} width={260} height={200} alt="Place image" />
-        </a>
+
+        <PlaceCardImage image={image} type={placeCardImageTypes.mainBoard} />
+
       </div>
       <div className="place-card__info">
-        <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">€{price}</b>
-            <span className="place-card__price-text">/&nbsp;night</span>
-          </div>
 
-          <FavoriteButton offer={props.offer} type={favoriteButtonsNames.placeCard} />
+        <PlaceCardDetails offer={props.offer} />
 
-        </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating}%`}} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
-        <h2 className="place-card__name">
-          <a
-            onClick={onPlaceCardNameClick}
-          >{heading}</a>
-        </h2>
-        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
 };
 
-export default withRouter(PlaceCardItem);
+export default PlaceCardItem;

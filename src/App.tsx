@@ -16,6 +16,8 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 // https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
 
 // new review length limit
+// stub if no offers in the  city
+// footer to component
 
 const App = (): JSX.Element => {
   return (
