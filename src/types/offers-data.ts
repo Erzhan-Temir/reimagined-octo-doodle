@@ -14,7 +14,7 @@ export interface Details {
 }
 
 export interface Offer {
-  readonly id?: string;
+  id?: string;
   readonly isPremium: boolean;
   readonly image: string;
   readonly city: string;

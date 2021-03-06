@@ -5,7 +5,7 @@ import {citiesNameList, sortingData} from '../../constants/constants';
 import {Dispatch} from 'redux';
 import {Offer, OffersDataState} from '../../types/offers-data';
 
-const initialState: OffersDataState = {
+export const initialState: OffersDataState = {
   isLoading: true,
   hasError: false,
   offers: [],
@@ -16,7 +16,7 @@ const initialState: OffersDataState = {
 };
 
 
-enum UserAction {
+export enum UserAction {
   FETCH_OFFERS = `FETCH_OFFERS`,
   FETCH_OFFERS_SUCCESS = `FETCH_OFFERS_SUCCESS`,
   FETCH_OFFERS_ERROR = `FETCH_OFFERS_ERROR`,
@@ -126,7 +126,7 @@ export const Operations = {
   },
 };
 
-const updateBookmarkedFlagInOffer = (offers: Offer[], id?: any): Offer[] => {
+export const updateBookmarkedFlagInOffer = (offers: Offer[], id?: any): Offer[] => {
   const updOfferIndex = offers.findIndex((offer) => offer.id === id);
   const updatedOffer = Object.assign({}, offers[updOfferIndex], {
     isBookmarked: !offers[updOfferIndex].isBookmarked,

@@ -12,7 +12,7 @@ const initialState: ReviewState = {
 };
 
 
-enum UserAction {
+export enum UserAction {
   ADD_REVIEW = `ADD_REVIEW`,
   FETCH_REVIEWS = `FETCH_REVIEWS`,
   FETCH_REVIEWS_SUCCESS = `FETCH_REVIEWS_SUCCESS`,
@@ -56,7 +56,7 @@ export const ActionsCreator = {
 };
 
 
-const createReview = (commentText: string, rating: number, author: string) => {
+export const createReview = (commentText: string, rating: number, author: string): Review => {
   return {
     avatar: `../img/avatar.svg`,
     author,

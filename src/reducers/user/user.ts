@@ -6,7 +6,7 @@ import {Offer} from '../../types/offers-data';
 import {UserState} from '../../types/user-data';
 
 
-const initialState: UserState = {
+export const initialState: UserState = {
   isLoggedIn: false,
   isLoginNoticeShowed: false,
   isFavoriteButtonDisabled: false,
@@ -18,7 +18,7 @@ const initialState: UserState = {
 };
 
 
-enum UserAction {
+export enum UserAction {
   ADD_TO_BOOKMARKED_IDS = 'ADD_TO_BOOKMARKED_ID',
   LOGIN = 'LOGIN',
   PENDING_AUTHORIZATION = 'PENDING_AUTHORIZATION',
@@ -84,8 +84,8 @@ export const Operations = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const addIdToBookmarkedID = (bookMarkedIDs: string[], id: any) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const addIdToBookmarkedID = (bookMarkedIDs: string[], id: any): string[] => {
   const indexOfNewId = bookMarkedIDs.indexOf(id);
   if (indexOfNewId > -1) {
     bookMarkedIDs.splice(indexOfNewId, 1);
