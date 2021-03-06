@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {getFavoritesCitiesList, getFavoritesListLength} from '../../reducers/user/user-selectors';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 import FavoritesLocationBoard from '../favorites-location-board/favorites-location-board';
+import Footer from '../footer/footer';
 import Header from '../header/header';
 
 
@@ -38,11 +39,7 @@ const PageFavorites = (): JSX.Element => {
           </section>
         </div>
       </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };

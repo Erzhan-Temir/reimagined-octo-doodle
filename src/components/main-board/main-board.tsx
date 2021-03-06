@@ -9,6 +9,7 @@ import {withLoadData} from '../../hocs/with-load-data';
 import {withCurrentCity} from '../../hocs/with-current-city';
 import {withOffers} from '../../hocs/with-offers';
 import Tabs from '../tabs/tabs';
+import MainBoardEmpty from '../main-board-empty/main-board-empty';
 
 interface Props {
   isLoading: boolean,
@@ -27,6 +28,10 @@ const MainBoard = (props: Props): JSX.Element => {
 
   if (isLoading) {
     return <LoadingStub />;
+  }
+
+  if (offers.length === 0) {
+    return <MainBoardEmpty currentCity={currentCity} />;
   }
 
   return (
@@ -51,7 +56,6 @@ const MainBoard = (props: Props): JSX.Element => {
           </div>
         </div>
       </div>
-
     </main>
 
 

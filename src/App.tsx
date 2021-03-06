@@ -12,12 +12,8 @@ import PageFavorites from './components/page-favorites/page-favorites';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // https://github.com/piotrwitek/react-redux-typescript-guide/blob/e0532ae099a1ddcce7cf263280e20714c7a53e72/playground/src/hoc/with-connected-count.tsx#L13
-// https://github.com/Alisa-Filatova/Six-cities/tree/master/src/components/page-wrapper
 // https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
 
-// new review length limit
-// stub if no offers in the  city
-// footer to component
 
 const App = (): JSX.Element => {
   return (
