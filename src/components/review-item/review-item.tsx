@@ -7,14 +7,7 @@ interface Props {
 }
 
 const ReviewItem = (props: Props): JSX.Element => {
-
-  const {review: {
-    author,
-    avatar,
-    date,
-    rating,
-    text,
-  }} = props;
+  const {review: {author, avatar, date, rating, text}} = props;
 
   const dateHumanized = dayjs(date).format(`MMMM YYYY`);
 

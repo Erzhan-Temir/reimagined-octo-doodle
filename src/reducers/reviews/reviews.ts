@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Dispatch} from 'redux';
-import {Review, ReviewIDs, ReviewState} from '../../types/review-data';
 import API from '../../services/api';
+import {Dispatch} from 'redux';
 import {Offer} from '../../types/offers-data';
 import {Operations as OffersDataOperations} from '../offers-data/offers-data';
+import {Review, ReviewIDs, ReviewState} from '../../types/review-data';
 
 const initialState: ReviewState = {
   isLoading: true,
@@ -11,12 +11,14 @@ const initialState: ReviewState = {
   currentReviewsID: [],
 };
 
+
 enum UserAction {
+  ADD_REVIEW = `ADD_REVIEW`,
   FETCH_REVIEWS = `FETCH_REVIEWS`,
   FETCH_REVIEWS_SUCCESS = `FETCH_REVIEWS_SUCCESS`,
   SET_CURRENT_REVIEWS_ID = `SET_CURRENT_REVIEWS_ID`,
-  ADD_REVIEW = `ADD_REVIEW`,
 }
+
 
 export interface ActionType {
   type: UserAction,
@@ -89,19 +91,23 @@ export const reviewsReducer = (state: ReviewState = initialState, action: Action
       return Object.assign({}, state, {
         isLoading: true,
       });
+
     case UserAction.FETCH_REVIEWS_SUCCESS:
       return Object.assign({}, state, {
         isLoading: false,
         reviewsList: action.payload,
       });
+
     case UserAction.SET_CURRENT_REVIEWS_ID:
       return Object.assign({}, state, {
         currentReviewsID: action.payload,
       });
+
     case UserAction.ADD_REVIEW:
       return Object.assign({}, state, {
         isLoading: true,
       });
+
     default:
       return state;
   }

@@ -1,9 +1,9 @@
 import React, {useRef, useEffect} from 'react';
-import L from 'leaflet';
 import {cities} from '../../constants/constants';
-import './map.css';
-import {useSelector} from 'react-redux';
 import {getActiveOfferID, getCurrentCity, getOffersFilteredByCity} from '../../reducers/offers-data/offers-data-selectors';
+import L from 'leaflet';
+import {useSelector} from 'react-redux';
+import './map.css';
 
 const pin = L.icon({
   iconUrl: '/img/pin.svg',
@@ -18,7 +18,6 @@ const activePin = L.icon({
 const Map = (): JSX.Element => {
   const offers = useSelector(getOffersFilteredByCity);
   const currentCity = useSelector(getCurrentCity);
-
   const activeOfferID = useSelector(getActiveOfferID);
 
   const mapRef = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -35,6 +34,7 @@ const Map = (): JSX.Element => {
       zoom,
       zoomControl: true,
     });
+
     map.setView(cityCoords, zoom);
 
     L.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -62,7 +62,6 @@ const Map = (): JSX.Element => {
 
   useEffect(() => {
     createMap();
-
     return () => map.remove();
   }, [currentCity, activeOfferID]);
 

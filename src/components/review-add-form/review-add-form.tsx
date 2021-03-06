@@ -1,19 +1,20 @@
 import React, {useState} from 'react';
-import {ratingStars} from '../../constants/constants';
-import RatingStar from '../rating-star/rating-star';
-import {Operations} from '../../reducers/reviews/reviews';
-import {useDispatch, useSelector} from 'react-redux';
 import {getOffer} from '../../reducers/offers-data/offers-data-selectors';
 import {getUserInfo} from '../../reducers/user/user-selectors';
+import {Operations} from '../../reducers/reviews/reviews';
+import RatingStar from '../rating-star/rating-star';
+import {ratingStars} from '../../constants/constants';
+import {useDispatch, useSelector} from 'react-redux';
 
 const ReviewAddForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const offer = useSelector(getOffer);
-
   const userInfo = useSelector(getUserInfo);
+
 
   const [commentText, setCommentText] = useState(``);
   const [rating, setRating] = useState(0);
+
 
   const handleSubmit = (evt: React.SyntheticEvent) => {
     evt.preventDefault();

@@ -1,24 +1,24 @@
 import React, {useEffect} from 'react';
-import Header from '../header/header';
-import PageDetailsBoard from '../page-details-board/page-details-board';
-import {RouteComponentProps} from 'react-router';
 import {ActionsCreator, Operations} from '../../reducers/offers-data/offers-data';
+import Header from '../header/header';
 import LoadingStub from '../loading-stub/loading-stub';
 import LoginNotice from '../log-in-notice/log-in-notice';
-import {useDispatch, useSelector} from 'react-redux';
 import {isOffersLoading} from '../../reducers/offers-data/offers-data-selectors';
+import PageDetailsBoard from '../page-details-board/page-details-board';
+import {RouteComponentProps} from 'react-router';
+import {useDispatch, useSelector} from 'react-redux';
 
-type RouteParams = {
+
+interface RouteParams {
   id: string,
-};
+}
 
 
 const PageDetails = (props: RouteComponentProps<RouteParams>): JSX.Element => {
-  const dispatch = useDispatch();
-
   const {id} = props.match.params;
 
   const isLoading = useSelector(isOffersLoading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(Operations.fetchOffer(id));

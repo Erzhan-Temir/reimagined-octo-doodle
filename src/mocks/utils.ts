@@ -2,7 +2,7 @@ export const OFFERS_COUNT = 20;
 
 export const REVIEWS_COUNT = 10;
 
-export const names = [`Angelina`, `Hoster`, `Ivan`, `Imre`];
+export const names = [`Angelina`, `Hoster`, `Ivan`, `Imre`, `John`];
 
 export const headings = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`];
 

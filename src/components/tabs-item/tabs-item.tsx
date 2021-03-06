@@ -1,11 +1,12 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
 import {ActionsCreator} from '../../reducers/offers-data/offers-data';
+import {useDispatch} from 'react-redux';
 
-type Props = {
-  cityName: string,
-  classList: string,
-};
+interface Props {
+  cityName: string;
+  classList: string;
+}
+
 
 const TabsItem = (props: Props): JSX.Element => {
   const dispatch = useDispatch();

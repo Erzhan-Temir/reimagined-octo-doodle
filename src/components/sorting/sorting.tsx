@@ -1,8 +1,8 @@
 import React from 'react';
 import {ActionsCreator} from '../../reducers/offers-data/offers-data';
+import {getSortingValue} from '../../reducers/offers-data/offers-data-selectors';
 import {sortingData} from '../../constants/constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {getSortingValue} from '../../reducers/offers-data/offers-data-selectors';
 
 const Sorting = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -18,19 +18,16 @@ const Sorting = (): JSX.Element => {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-
       <select
         onChange={handleSortingChange}
         className="places__sorting-type"
         id="places-sorting"
         value={sorting}
       >
-
         {
           sortingEntries.map((sortingItem) => {
             const key = sortingItem[0];
             const val = sortingItem[1];
-
             return (
               <option
                 key={key}
@@ -40,9 +37,7 @@ const Sorting = (): JSX.Element => {
             );
           })
         }
-
       </select>
-
     </form>
   );
 };

@@ -1,4 +1,7 @@
-import {CitiesDictionary, FavoriteButtonDictionary, PlaceCardImageSizeDictionary, SortingDictionary} from '../types/utils';
+import {CitiesDictionary, FavoriteButtonDictionary, PlaceCardImageSizeDictionary, RatingStarType, SortingDictionary} from '../types/utils';
+
+
+export const LOGIN_NOTICE_INTERVAL = 10000;
 
 export const cities: CitiesDictionary = {
   "Amsterdam": {
@@ -36,7 +39,7 @@ export const sortingData: SortingDictionary = {
 
 export const citiesNameList = Object.keys(cities).sort();
 
-export const ratingStars = [
+export const ratingStars: RatingStarType[] = [
   {
     name: `5-stars`,
     value: 5
@@ -90,6 +93,4 @@ export const placeCardImageSize: PlaceCardImageSizeDictionary = {
     height: 110,
   },
 };
-
-export const LOGIN_NOTICE_INTERVAL = 10000;
 

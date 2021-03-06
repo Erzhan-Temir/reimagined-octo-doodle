@@ -1,17 +1,14 @@
 import React, {Fragment} from 'react';
+import {RatingStarType} from '../../types/utils';
 
-interface RatingStar {
-  name: string;
-  value: number;
-}
 
 interface Props {
   setRating: (rating: number) => void;
-  ratingStar: RatingStar;
+  ratingStar: RatingStarType;
 }
 
-const RatingStar = (props: Props): JSX.Element => {
 
+const RatingStar = (props: Props): JSX.Element => {
   const {ratingStar: {name, value}, setRating} = props;
 
   return (

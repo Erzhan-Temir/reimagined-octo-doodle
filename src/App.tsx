@@ -1,22 +1,15 @@
 import React from 'react';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {rootReducer} from './reducers/root-reducer';
-import thunk from 'redux-thunk';
 import PageMain from './components/page-main/page-main';
 import PageDetails from './components/page-details/page-details';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PageLogIn from './components/page-log-in/page-log-in';
 import PageFavorites from './components/page-favorites/page-favorites';
+import {rootReducer} from './reducers/root-reducer';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import thunk from 'redux-thunk';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-
-// https://github.com/piotrwitek/react-redux-typescript-guide/blob/e0532ae099a1ddcce7cf263280e20714c7a53e72/playground/src/hoc/with-connected-count.tsx#L13
-// https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
-
-// Delete reselect
-// hardcode types for string arrays
-// destructuring for selesctors
 
 const App = (): JSX.Element => {
   return (

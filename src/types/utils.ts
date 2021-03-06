@@ -24,3 +24,8 @@ export interface PlaceCardImageSizeDictionary {
     height: number,
   }
 }
+
+export interface RatingStarType {
+  name: string;
+  value: number;
+}

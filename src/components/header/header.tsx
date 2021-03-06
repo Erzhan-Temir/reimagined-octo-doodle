@@ -1,20 +1,20 @@
 import React from 'react';
+import {getLoginInfo, getUserInfo} from '../../reducers/user/user-selectors';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {getLoginInfo, getUserInfo} from '../../reducers/user/user-selectors';
 
 
 const Header = (): JSX.Element => {
+  const isLoggedIn = useSelector(getLoginInfo);
   const userInfo = useSelector(getUserInfo);
   const {email} = userInfo;
 
-  const isLoggedIn = useSelector(getLoginInfo);
 
   const getUserName = (): JSX.Element => {
     return <span className="header__user-name user__name">{email}</span>;
   };
 
-  const signInStub = (): JSX.Element => {
+  const getSignInStub = (): JSX.Element => {
     return <span className="header__login">Sign in</span>;
   };
 
@@ -33,11 +33,9 @@ const Header = (): JSX.Element => {
                 <Link to="/login" className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-
                   {
-                    isLoggedIn ? getUserName() : signInStub()
+                    isLoggedIn ? getUserName() : getSignInStub()
                   }
-
                 </Link>
               </li>
             </ul>

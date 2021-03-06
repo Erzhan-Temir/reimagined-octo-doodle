@@ -1,14 +1,16 @@
 import React, {useEffect} from 'react';
+import {ActionType} from '../../reducers/user/user';
 import {Link} from 'react-router-dom';
 import {LOGIN_NOTICE_INTERVAL} from '../../constants/constants';
 import {withLoginNotice} from '../../hocs/with-login-notice';
-import {ActionType} from '../../reducers/user/user';
 import './log-in-notice.css';
+
 
 interface Props {
   isLoginNoticeShowed: boolean;
   hideLoginNotice: () => ActionType;
 }
+
 
 const LoginNotice = (props: Props) => {
   const {isLoginNoticeShowed, hideLoginNotice} = props;

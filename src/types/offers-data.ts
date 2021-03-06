@@ -1,17 +1,19 @@
 import {itemCoords} from './utils';
 
-type Details = {
-  bedrooms: number,
-  occupation: number,
-  features: string[],
+export type ActiveOfferID = null | string;
+
+export interface Details {
+  bedrooms: number;
+  occupation: number;
+  features: string[];
   host: {
-    name: string,
-    avatar: string,
-    rating: string,
+    name: string;
+    avatar: string;
+    rating: string;
   }
 }
 
-export type Offer = {
+export interface Offer {
   readonly id?: string;
   readonly isPremium: boolean;
   readonly image: string;
@@ -26,13 +28,12 @@ export type Offer = {
   readonly details: Details;
 }
 
-export type ActiveOfferID = null | string;
-
 export interface OffersDataState {
-  readonly isLoading: boolean,
-  readonly offers: Offer[],
-  readonly offer: null | Offer,
-  readonly currentCity: string,
-  readonly sorting: string,
-  readonly activeOfferId: ActiveOfferID,
+  readonly isLoading: boolean;
+  readonly offers: Offer[];
+  readonly offer: null | Offer;
+  readonly currentCity: string;
+  readonly sorting: string;
+  readonly activeOfferId: ActiveOfferID;
+  readonly hasError: boolean;
 }

@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from 'axios';
-
 import {makeServer} from '../server/server';
 
+
 makeServer();
+
 
 const API = {
   base: axios.create({

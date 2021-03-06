@@ -1,7 +1,8 @@
 import React from 'react';
 import {placeCardImageSize} from '../../constants/constants';
-import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router';
+import {withRouter} from 'react-router-dom';
+
 
 interface Props extends RouteComponentProps {
   image: string;
@@ -9,14 +10,16 @@ interface Props extends RouteComponentProps {
   type: string;
 }
 
-const PlaceCardImage = (props: Props): JSX.Element => {
 
+const PlaceCardImage = (props: Props): JSX.Element => {
   const {image, type, id} = props;
+
 
   const onPlaceCardImageClick = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
     props.history.push(`/${id}`);
   };
+
 
   return (
     <a

@@ -1,23 +1,25 @@
 import React, {Fragment} from 'react';
-import {withRouter} from 'react-router-dom';
-import {RouteComponentProps} from 'react-router';
+import FavoriteButton from '../favorite-button/favorite-button';
 import {favoriteButtonsNames} from '../../constants/constants';
 import {Offer} from '../../types/offers-data';
-import FavoriteButton from '../favorite-button/favorite-button';
+import {RouteComponentProps} from 'react-router';
+import {withRouter} from 'react-router-dom';
+
 
 interface Props extends RouteComponentProps {
   offer: Offer;
 }
 
-const PlaceCardDetails = (props: Props): JSX.Element => {
 
-  const {offer} = props;
-  const {id, price, rating, heading, type} = offer;
+const PlaceCardDetails = (props: Props): JSX.Element => {
+  const {offer, offer: {id, price, rating, heading, type}} = props;
+
 
   const onPlaceCardNameClick = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
     props.history.push(`/${id}`);
   };
+
 
   return (
     <Fragment>
@@ -26,7 +28,7 @@ const PlaceCardDetails = (props: Props): JSX.Element => {
           <b className="place-card__price-value">€{price}</b>
           <span className="place-card__price-text">/&nbsp;night</span>
         </div>
-        <FavoriteButton offer={props.offer} type={favoriteButtonsNames.placeCard} />
+        <FavoriteButton offer={offer} type={favoriteButtonsNames.placeCard} />
       </div>
 
       <div className="place-card__rating rating">

@@ -1,9 +1,9 @@
 import React from 'react';
 import {citiesNameList} from '../../constants/constants';
-import TabsItem from '../tabs-item/tabs-item';
 import classNames from 'classnames';
-import {useSelector} from 'react-redux';
 import {getCurrentCity} from '../../reducers/offers-data/offers-data-selectors';
+import {useSelector} from 'react-redux';
+import TabsItem from '../tabs-item/tabs-item';
 
 
 const Tabs = (): JSX.Element => {
@@ -15,7 +15,6 @@ const Tabs = (): JSX.Element => {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-
           {
             citiesNameList.map((city) => {
               return (
@@ -29,7 +28,6 @@ const Tabs = (): JSX.Element => {
               );
             })
           }
-
         </ul>
       </section>
     </div>

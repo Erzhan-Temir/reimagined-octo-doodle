@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import LoadingStub from '../loading-stub/loading-stub';
-import ReviewItem from '../review-item/review-item';
-import ReviewAddForm from '../review-add-form/review-add-form';
-import {useDispatch, useSelector} from 'react-redux';
+import {ActionsCreator, Operations} from '../../reducers/reviews/reviews';
 import {getOffer} from '../../reducers/offers-data/offers-data-selectors';
 import {getLoginInfo} from '../../reducers/user/user-selectors';
 import {getReviews, isReviewsLoading} from '../../reducers/reviews/reviews-selectors';
-import {ActionsCreator, Operations} from '../../reducers/reviews/reviews';
+import LoadingStub from '../loading-stub/loading-stub';
+import ReviewAddForm from '../review-add-form/review-add-form';
+import ReviewItem from '../review-item/review-item';
+import {useDispatch, useSelector} from 'react-redux';
 
 
 const ReviewsBoard = (): JSX.Element => {

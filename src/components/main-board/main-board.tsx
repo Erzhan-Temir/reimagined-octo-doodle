@@ -1,19 +1,21 @@
 import React, {useEffect} from 'react';
-import Sorting from '../sorting/sorting';
-import PlaceCardList from '../place-card-list/place-card-list';
-import Map from '../map/map';
+import {compose} from 'redux';
+import {getCurrentCity, getSortedOffers, isOffersLoading} from '../../reducers/offers-data/offers-data-selectors';
 import LoadingStub from '../loading-stub/loading-stub';
-import Tabs from '../tabs/tabs';
+import Map from '../map/map';
 import MainBoardEmpty from '../main-board-empty/main-board-empty';
-import {useDispatch, useSelector} from 'react-redux';
-import {getCurrentCity, isOffersLoading, getOffersFilteredByCity} from '../../reducers/offers-data/offers-data-selectors';
 import {Operations} from '../../reducers/offers-data/offers-data';
+import {useDispatch, useSelector} from 'react-redux';
+import PlaceCardList from '../place-card-list/place-card-list';
+import Sorting from '../sorting/sorting';
+import Tabs from '../tabs/tabs';
+import withErrorBoundary from '../../hocs/with-error-boundary';
 
 
 const MainBoard = (): JSX.Element => {
   const dispatch = useDispatch();
 
-  const offers = useSelector(getOffersFilteredByCity);
+  const offers = useSelector(getSortedOffers);
   const isLoading = useSelector(isOffersLoading);
   const currentCity = useSelector(getCurrentCity);
 
@@ -21,21 +23,21 @@ const MainBoard = (): JSX.Element => {
     dispatch(Operations.fetchOffers);
   }, []);
 
+
   if (isLoading) {
     return <LoadingStub />;
   }
+
 
   if (offers.length === 0) {
     return <MainBoardEmpty currentCity={currentCity} />;
   }
 
-  return (
 
+  return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
-
       <Tabs />
-
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
@@ -52,9 +54,7 @@ const MainBoard = (): JSX.Element => {
         </div>
       </div>
     </main>
-
-
   );
 };
 
-export default MainBoard;
+export default compose<React.FunctionComponent>(withErrorBoundary)(MainBoard);

@@ -30,4 +30,4 @@ export const getFavoritesOffersFromCity = (city: string) => (state: RootState): 
 
 export const getPendingAuthorization = (state: RootState): boolean => state.user.pendingAuthorization;
 
-export const getUserInfo = ({user}: RootState): UserInfo => user.userInfo;
+export const getUserInfo = (state: RootState): UserInfo => state.user.userInfo;

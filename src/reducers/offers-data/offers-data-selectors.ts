@@ -20,7 +20,7 @@ export const getOffersFilteredByCity = (state: RootState): Offer[] => {
   return offers.filter((offer) => (offer.city === currentCity));
 };
 
-export const getSortingValue = ({offersData}: RootState): string => offersData.sorting;
+export const getSortingValue = (state: RootState): string => state.offersData.sorting;
 
 export const getSortedOffers = (state: RootState): Offer[] => {
   const offers = getOffersFilteredByCity(state);
@@ -40,3 +40,4 @@ export const getSortedOffers = (state: RootState): Offer[] => {
   }
 };
 
+export const getErrorStatus = ({offersData}: RootState): boolean => offersData.hasError;

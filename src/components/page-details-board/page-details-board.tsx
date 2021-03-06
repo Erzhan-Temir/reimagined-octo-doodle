@@ -1,20 +1,22 @@
 import React from 'react';
+import FavoriteButton from '../favorite-button/favorite-button';
+import {favoriteButtonsNames} from '../../constants/constants';
+import {getOffer} from '../../reducers/offers-data/offers-data-selectors';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
 import ReviewsBoard from '../reviews-board/reviews-board';
-import FavoriteButton from '../favorite-button/favorite-button';
-import {favoriteButtonsNames} from '../../constants/constants';
 import {useSelector} from 'react-redux';
-import {getOffer} from '../../reducers/offers-data/offers-data-selectors';
 
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const PageDetailsBoard = () => {
   const offer = useSelector(getOffer);
 
+
   if (!offer) {
     return null;
   }
+
 
   const {
     isPremium,
@@ -36,7 +38,7 @@ const PageDetailsBoard = () => {
     </div>
   );
 
-  const ratingNumber = (rating * 5) / 100; // ref
+  const ratingNumber = (rating * 5) / 100;
 
   return (
     <main className="page__main page__main--property">
