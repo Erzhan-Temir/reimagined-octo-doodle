@@ -1,29 +1,24 @@
 import React, {useEffect} from 'react';
-import {compose} from 'redux';
 import Sorting from '../sorting/sorting';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
-import {Offer} from '../../types/offers-data';
 import LoadingStub from '../loading-stub/loading-stub';
-import {withLoadData} from '../../hocs/with-load-data';
-import {withCurrentCity} from '../../hocs/with-current-city';
-import {withOffers} from '../../hocs/with-offers';
 import Tabs from '../tabs/tabs';
 import MainBoardEmpty from '../main-board-empty/main-board-empty';
-
-interface Props {
-  isLoading: boolean,
-  offers: Offer[],
-  currentCity: string,
-  fetchOffers: () => Promise<[]>,
-}
+import {useDispatch, useSelector} from 'react-redux';
+import {getCurrentCity, isOffersLoading, getOffersFilteredByCity} from '../../reducers/offers-data/offers-data-selectors';
+import {Operations} from '../../reducers/offers-data/offers-data';
 
 
-const MainBoard = (props: Props): JSX.Element => {
-  const {isLoading, offers, currentCity, fetchOffers} = props;
+const MainBoard = (): JSX.Element => {
+  const dispatch = useDispatch();
+
+  const offers = useSelector(getOffersFilteredByCity);
+  const isLoading = useSelector(isOffersLoading);
+  const currentCity = useSelector(getCurrentCity);
 
   useEffect(() => {
-    fetchOffers();
+    dispatch(Operations.fetchOffers);
   }, []);
 
   if (isLoading) {
@@ -62,4 +57,4 @@ const MainBoard = (props: Props): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent>(withLoadData, withCurrentCity, withOffers)(MainBoard);
+export default MainBoard;

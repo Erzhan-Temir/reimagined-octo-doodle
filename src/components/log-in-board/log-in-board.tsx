@@ -1,24 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import {useDispatch, useSelector} from 'react-redux';
+import {getPendingAuthorization} from '../../reducers/user/user-selectors';
+import {Operations} from '../../reducers/user/user';
 import "./log-in-board.css";
 
 type FormData = {
   email: string;
 };
 
-type Props = {
-  pendingAuthorization: boolean;
-  login: (email: string) => Promise<string>;
-}
 
-const LogInBoard = (props: Props): JSX.Element => {
-  const {pendingAuthorization, login} = props;
+const LogInBoard = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const pendingAuthorization = useSelector(getPendingAuthorization);
 
   const {register, handleSubmit} = useForm<FormData>();
 
   const onSubmit = handleSubmit(({email}) => {
-    login(email);
+    dispatch(Operations.login(email));
   });
 
   return (

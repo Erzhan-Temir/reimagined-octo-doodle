@@ -33,7 +33,7 @@ const FavoritesLocationBoard = (props: Props): JSX.Element => {
             return (
               <article key={offer.id} className="favorites__card place-card">
                 <div className="favorites__image-wrapper place-card__image-wrapper">
-                  <PlaceCardImage image={offer.image} type={placeCardImageTypes.favoriteBoard} />
+                  <PlaceCardImage image={offer.image} id={offer.id} type={placeCardImageTypes.favoriteBoard} />
                 </div>
 
                 <div className="favorites__card-info place-card__info">

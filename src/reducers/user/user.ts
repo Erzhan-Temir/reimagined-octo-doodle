@@ -65,7 +65,7 @@ export const ActionsCreator = {
 
 
 export const Operations = {
-  login: () => (email: string) => (dispatch: Dispatch): void => {
+  login: (email: string) => (dispatch: Dispatch): void => {
     dispatch(ActionsCreator.pendingAuthorization());
     API.login(email)
       .then((response) => {

@@ -1,19 +1,19 @@
 import React from 'react';
 import {Offer} from '../../types/offers-data';
-import {ActionType} from '../../reducers/offers-data/offers-data';
+import {ActionsCreator} from '../../reducers/offers-data/offers-data';
 import {placeCardImageTypes} from '../../constants/constants';
 import PlaceCardImage from '../place-card-image/place-card-image';
 import PlaceCardDetails from '../place-card-details/place-card-details';
+import {useDispatch} from 'react-redux';
 
 interface Props {
   offer: Offer;
-  setActiveOffer: (id: null | string | undefined) => ActionType,
 }
 
 const PlaceCardItem = (props: Props): JSX.Element => {
+  const dispatch = useDispatch();
 
   const {
-    setActiveOffer,
     offer: {
       id,
       isPremium,
@@ -28,11 +28,11 @@ const PlaceCardItem = (props: Props): JSX.Element => {
   );
 
   const handleMouseHoverEnter = (): void => {
-    setActiveOffer(id);
+    dispatch(ActionsCreator.setActiveOffer(id));
   };
 
   const handleMouseHoverLeave = (): void => {
-    setActiveOffer(null);
+    dispatch(ActionsCreator.setActiveOffer(``));
   };
 
   return (
@@ -48,7 +48,7 @@ const PlaceCardItem = (props: Props): JSX.Element => {
 
       <div className="cities__image-wrapper place-card__image-wrapper">
 
-        <PlaceCardImage image={image} type={placeCardImageTypes.mainBoard} />
+        <PlaceCardImage image={image} id={id} type={placeCardImageTypes.mainBoard} />
 
       </div>
       <div className="place-card__info">

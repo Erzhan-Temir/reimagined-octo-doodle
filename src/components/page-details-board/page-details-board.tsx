@@ -1,24 +1,22 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
 import ReviewsBoard from '../reviews-board/reviews-board';
-import {Offer} from '../../types/offers-data';
-import {withCurrentOffer} from '../../hocs/with-current-offer';
 import FavoriteButton from '../favorite-button/favorite-button';
 import {favoriteButtonsNames} from '../../constants/constants';
+import {useSelector} from 'react-redux';
+import {getOffer} from '../../reducers/offers-data/offers-data-selectors';
 
-interface Props {
-  offer: Offer;
-}
 
-const PageDetailsBoard = (props: Props) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const PageDetailsBoard = () => {
+  const offer = useSelector(getOffer);
 
-  if (!props.offer) {
+  if (!offer) {
     return null;
   }
 
-  const {offer: {
+  const {
     isPremium,
     price,
     rating,
@@ -30,7 +28,7 @@ const PageDetailsBoard = (props: Props) => {
       features,
       host,
     }
-  }} = props;
+  } = offer;
 
   const premiumBadge = (
     <div className="property__mark">
@@ -77,7 +75,7 @@ const PageDetailsBoard = (props: Props) => {
                 {heading}
               </h1>
 
-              <FavoriteButton offer={props.offer} type={favoriteButtonsNames.pageDetails} />
+              <FavoriteButton offer={offer} type={favoriteButtonsNames.pageDetails} />
 
             </div>
             <div className="property__rating rating">
@@ -107,7 +105,7 @@ const PageDetailsBoard = (props: Props) => {
               <ul className="property__inside-list">
 
                 {
-                  features.map((feature) => {
+                  features.map((feature: string) => {
                     return (
                       <li key={feature} className="property__inside-item">
                         {feature}
@@ -161,4 +159,4 @@ const PageDetailsBoard = (props: Props) => {
   );
 };
 
-export default withCurrentOffer(PageDetailsBoard);
+export default PageDetailsBoard;

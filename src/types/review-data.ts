@@ -1,9 +1,9 @@
 export interface Review {
   id?: string;
-  avatar: string;
+  avatar?: string;
   author: string;
   text: string;
-  date: string;
+  date?: string;
   rating: number;
 }
 

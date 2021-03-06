@@ -66,7 +66,7 @@ export const ActionsCreator = {
       payload: sorting,
     };
   },
-  setActiveOffer: (id: string): ActionType => {
+  setActiveOffer: (id?: string): ActionType => {
     return {
       type: UserAction.SET_ACTIVE_OFFER,
       payload: id,
@@ -82,12 +82,12 @@ export const ActionsCreator = {
 
 
 export const Operations = {
-  fetchOffers: () => () => (dispatch: Dispatch): void => {
+  fetchOffers: (dispatch: Dispatch): void => {
     dispatch(ActionsCreator.fetchOffers());
     API.getOffers()
       .then((response) => dispatch(ActionsCreator.fetchOffersSuccess(response.data.offers)));
   },
-  fetchOffer: () => (id: string) => (dispatch: Dispatch): void => {
+  fetchOffer: (id: string) => (dispatch: Dispatch): void => {
     dispatch(ActionsCreator.fetchOffers());
     API.getOffer(id)
       .then((response) => dispatch(ActionsCreator.fetchOfferSuccess(response.data.offers)));
@@ -98,6 +98,11 @@ export const Operations = {
       isBookmarked: !offer.isBookmarked,
     });
     API.updateOffer(id, updatedOffer);
+  },
+  updateOffer: (review: any, offer: Offer) => (dispatch: Dispatch): void => {
+    offer.reviewIDs.push(review.id);
+    API.updateOffer(offer.id, offer)
+      .then((response) => dispatch(ActionsCreator.fetchOfferSuccess(response.data.offers)));
   },
 };
 

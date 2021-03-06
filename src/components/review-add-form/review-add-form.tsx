@@ -1,28 +1,16 @@
 import React, {useState} from 'react';
-import {compose} from 'redux';
 import {ratingStars} from '../../constants/constants';
-import {withAddReview} from '../../hocs/with-add-review';
 import RatingStar from '../rating-star/rating-star';
-import {ActionType} from '../../reducers/reviews/reviews';
-import {withCurrentOffer} from '../../hocs/with-current-offer';
-import {Offer} from '../../types/offers-data';
-import {withUserInfo} from '../../hocs/with-user-info';
-import {UserInfo} from '../../types/user-data';
+import {Operations} from '../../reducers/reviews/reviews';
+import {useDispatch, useSelector} from 'react-redux';
+import {getOffer} from '../../reducers/offers-data/offers-data-selectors';
+import {getUserInfo} from '../../reducers/user/user-selectors';
 
-interface Props {
-  currentOfferId: string;
-  offer: Offer;
-  userInfo: UserInfo;
-  addReview: (newReviewData: {
-    text: string,
-    rating: number,
-    author: string,
-  }, offer: Offer) => ActionType;
-}
+const ReviewAddForm = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const offer = useSelector(getOffer);
 
-const ReviewAddForm = (props: Props): JSX.Element => {
-
-  const {addReview, offer, userInfo} = props;
+  const userInfo = useSelector(getUserInfo);
 
   const [commentText, setCommentText] = useState(``);
   const [rating, setRating] = useState(0);
@@ -30,11 +18,11 @@ const ReviewAddForm = (props: Props): JSX.Element => {
   const handleSubmit = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
 
-    addReview({
+    dispatch(Operations.addReview({
       text: commentText,
       rating,
       author: userInfo.email,
-    }, offer);
+    }, offer));
   };
 
   return (
@@ -71,4 +59,4 @@ const ReviewAddForm = (props: Props): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent>(withAddReview, withCurrentOffer, withUserInfo)(ReviewAddForm);
+export default ReviewAddForm;

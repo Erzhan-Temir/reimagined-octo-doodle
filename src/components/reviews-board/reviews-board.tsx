@@ -1,29 +1,26 @@
 import React, {useEffect} from 'react';
-import {compose} from 'redux';
-import {withLoginInfo} from '../../hocs/with-login-info';
-import {withReviews} from '../../hocs/with-reviews';
-import {Review} from '../../types/review-data';
 import LoadingStub from '../loading-stub/loading-stub';
 import ReviewItem from '../review-item/review-item';
 import ReviewAddForm from '../review-add-form/review-add-form';
-import {withCurrentOffer} from '../../hocs/with-current-offer';
-import {Offer} from '../../types/offers-data';
+import {useDispatch, useSelector} from 'react-redux';
+import {getOffer} from '../../reducers/offers-data/offers-data-selectors';
+import {getLoginInfo} from '../../reducers/user/user-selectors';
+import {getReviews, isReviewsLoading} from '../../reducers/reviews/reviews-selectors';
+import {ActionsCreator, Operations} from '../../reducers/reviews/reviews';
 
-interface Props {
-  isLoading: boolean;
-  isLoggedIn: boolean;
-  reviewsList: Review[];
-  offer: Offer;
-  setCurrentReviewsID: (reviewIDs: string[]) => void;
-  fetchReviews: () => void;
-}
 
-const ReviewsBoard = (props: Props): JSX.Element => {
-  const {isLoading, isLoggedIn, reviewsList, offer, setCurrentReviewsID, fetchReviews} = props;
+const ReviewsBoard = (): JSX.Element => {
+  const dispatch = useDispatch();
+
+  const reviewsList = useSelector(getReviews);
+  const isLoading = useSelector(isReviewsLoading);
+  const isLoggedIn = useSelector(getLoginInfo);
+  const offer = useSelector(getOffer);
+
 
   useEffect(() => {
-    setCurrentReviewsID(offer.reviewIDs);
-    fetchReviews();
+    dispatch(ActionsCreator.setCurrentReviewsID(offer.reviewIDs));
+    dispatch(Operations.fetchReviews);
   }, [offer]);
 
 
@@ -48,4 +45,4 @@ const ReviewsBoard = (props: Props): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent>(withReviews, withLoginInfo, withCurrentOffer)(ReviewsBoard);
+export default ReviewsBoard;

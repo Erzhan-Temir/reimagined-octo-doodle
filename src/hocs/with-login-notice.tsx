@@ -27,15 +27,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 export const connector = connect(mapStateToProps, mapDispatchToProps);
 
+
 type ReduxProps = ConnectedProps<typeof connector>;
 
-export const withLoginNotice = <BaseProps extends InjectedProps>(BaseComponent: ComponentType<BaseProps>): FunctionComponent => {
 
+export const withLoginNotice = <BaseProps extends InjectedProps>(BaseComponent: ComponentType<BaseProps>): FunctionComponent => {
   const WithLoginNotice: FunctionComponent<BaseProps & ReduxProps> = (props) => {
     return (
       <BaseComponent {...(props as BaseProps)} />
     );
   };
-
   return connector(WithLoginNotice as any);
 };

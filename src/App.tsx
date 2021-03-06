@@ -14,6 +14,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 // https://github.com/piotrwitek/react-redux-typescript-guide/blob/e0532ae099a1ddcce7cf263280e20714c7a53e72/playground/src/hoc/with-connected-count.tsx#L13
 // https://redux.js.org/recipes/usage-with-typescript#type-checking-middlewares
 
+// Delete reselect
+// hardcode types for string arrays
+// destructuring for selesctors
 
 const App = (): JSX.Element => {
   return (

@@ -92,3 +92,4 @@ export const placeCardImageSize: PlaceCardImageSizeDictionary = {
 };
 
 export const LOGIN_NOTICE_INTERVAL = 10000;
+

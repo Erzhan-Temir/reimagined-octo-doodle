@@ -1,24 +1,26 @@
 import React from 'react';
-import {ActionType} from '../../reducers/offers-data/offers-data';
-import {withSorting} from '../../hocs/with-sorting';
+import {ActionsCreator} from '../../reducers/offers-data/offers-data';
 import {sortingData} from '../../constants/constants';
+import {useDispatch, useSelector} from 'react-redux';
+import {getSortingValue} from '../../reducers/offers-data/offers-data-selectors';
 
-interface Props {
-  sorting: string,
-  changeSorting: (sorting: string) => ActionType,
-}
+const Sorting = (): JSX.Element => {
+  const dispatch = useDispatch();
 
-const Sorting = (props: Props): JSX.Element => {
-
-  const {sorting, changeSorting} = props;
+  const sorting = useSelector(getSortingValue);
   const sortingEntries = Object.entries(sortingData);
+
+  const handleSortingChange = (evt: React.SyntheticEvent) => {
+    const target = evt.target as HTMLSelectElement;
+    dispatch(ActionsCreator.changeSorting(target.value));
+  };
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
 
       <select
-        onChange={(evt) => changeSorting(evt.target.value)}
+        onChange={handleSortingChange}
         className="places__sorting-type"
         id="places-sorting"
         value={sorting}
@@ -45,4 +47,4 @@ const Sorting = (props: Props): JSX.Element => {
   );
 };
 
-export default withSorting(Sorting);
+export default Sorting;

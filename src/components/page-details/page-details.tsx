@@ -2,37 +2,28 @@ import React, {useEffect} from 'react';
 import Header from '../header/header';
 import PageDetailsBoard from '../page-details-board/page-details-board';
 import {RouteComponentProps} from 'react-router';
-import {compose} from 'redux';
-import {withLoadOffer} from '../../hocs/with-load-offer';
-import {Offer} from '../../types/offers-data';
-import {ActionType} from '../../reducers/offers-data/offers-data';
+import {ActionsCreator, Operations} from '../../reducers/offers-data/offers-data';
 import LoadingStub from '../loading-stub/loading-stub';
 import LoginNotice from '../log-in-notice/log-in-notice';
+import {useDispatch, useSelector} from 'react-redux';
+import {isOffersLoading} from '../../reducers/offers-data/offers-data-selectors';
 
 type RouteParams = {
   id: string,
 };
 
-interface InjectedProps {
-  isLoading: boolean,
-  offer: Offer;
-  fetchOffer: (id: string) => ActionType;
-  removeOfferFromState: () => ActionType;
-}
 
-const PageDetails = (props: RouteComponentProps<RouteParams> & InjectedProps) => {
+const PageDetails = (props: RouteComponentProps<RouteParams>): JSX.Element => {
+  const dispatch = useDispatch();
 
   const {id} = props.match.params;
 
-  const {
-    isLoading,
-    fetchOffer,
-    removeOfferFromState} = props;
+  const isLoading = useSelector(isOffersLoading);
 
   useEffect(() => {
-    fetchOffer(id);
+    dispatch(Operations.fetchOffer(id));
     return () => {
-      removeOfferFromState();
+      dispatch(ActionsCreator.removeOfferFromState);
     };
   }, [id]);
 
@@ -45,4 +36,4 @@ const PageDetails = (props: RouteComponentProps<RouteParams> & InjectedProps) =>
   );
 };
 
-export default compose<React.FunctionComponent<InjectedProps>>(withLoadOffer)(PageDetails);
+export default PageDetails;

@@ -1,23 +1,15 @@
 import React from 'react';
-import {compose} from 'redux';
 import {citiesNameList} from '../../constants/constants';
 import TabsItem from '../tabs-item/tabs-item';
 import classNames from 'classnames';
-import {ActionType} from '../../reducers/offers-data/offers-data';
-import {withChangeCity} from '../../hocs/with-change-city';
-import {withCurrentCity} from '../../hocs/with-current-city';
+import {useSelector} from 'react-redux';
+import {getCurrentCity} from '../../reducers/offers-data/offers-data-selectors';
 
 
-interface Props {
-  currentCity: string,
-  changeCity: (city: string) => ActionType,
-}
+const Tabs = (): JSX.Element => {
+  const currentCity = useSelector(getCurrentCity);
 
-
-const Tabs = (props: Props): JSX.Element => {
-  const {currentCity, changeCity} = props;
   const activeLinkClass = `tabs__item--active`;
-
 
   return (
     <div className="tabs">
@@ -33,7 +25,6 @@ const Tabs = (props: Props): JSX.Element => {
                   classList={classNames(`locations__item-link tabs__item`, {
                     [activeLinkClass]: currentCity === city,
                   })}
-                  changeCity={changeCity}
                 />
               );
             })
@@ -45,4 +36,4 @@ const Tabs = (props: Props): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent>(withCurrentCity, withChangeCity)(Tabs);
+export default Tabs;

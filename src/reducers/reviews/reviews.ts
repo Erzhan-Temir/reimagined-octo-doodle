@@ -3,7 +3,7 @@ import {Dispatch} from 'redux';
 import {Review, ReviewIDs, ReviewState} from '../../types/review-data';
 import API from '../../services/api';
 import {Offer} from '../../types/offers-data';
-import {ActionsCreator as OfferActionsCreator} from '../offers-data/offers-data';
+import {Operations as OffersDataOperations} from '../offers-data/offers-data';
 
 const initialState: ReviewState = {
   isLoading: true,
@@ -66,23 +66,20 @@ const createReview = (commentText: string, rating: number, author: string) => {
 
 
 export const Operations = {
-  fetchReviews: () => () => (dispatch: Dispatch): void => {
+  fetchReviews: (dispatch: Dispatch): void => {
     dispatch(ActionsCreator.fetchReviews());
     API.getReviews()
       .then((response) => dispatch(ActionsCreator.fetchReviewsSuccess(response.data.reviews)));
   },
 
-  addReview: () => ({text, rating, author}: Review, offer: Offer) => (dispatch: Dispatch): void => {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  addReview: ({text, rating, author}: Review, offer: Offer) => (dispatch: any): void => {
     API.addReview(createReview(text, rating, author))
       .then((response) => {
         dispatch(ActionsCreator.addReview(response.data.reviews));
         return response.data.reviews;
       })
-      .then((review) => {
-        offer.reviewIDs.push(review.id);
-        return API.updateOffer(offer.id, offer);
-      })
-      .then((response) => dispatch(OfferActionsCreator.fetchOfferSuccess(response.data.offers)));
+      .then((review) => dispatch(OffersDataOperations.updateOffer(review, offer)));
   },
 };
 

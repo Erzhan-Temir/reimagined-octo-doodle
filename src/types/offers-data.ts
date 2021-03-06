@@ -26,11 +26,13 @@ export type Offer = {
   readonly details: Details;
 }
 
+export type ActiveOfferID = null | string;
+
 export interface OffersDataState {
   readonly isLoading: boolean,
   readonly offers: Offer[],
   readonly offer: null | Offer,
   readonly currentCity: string,
   readonly sorting: string,
-  readonly activeOfferId: null | string,
+  readonly activeOfferId: ActiveOfferID,
 }

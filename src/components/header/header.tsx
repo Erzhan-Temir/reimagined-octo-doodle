@@ -1,18 +1,14 @@
 import React from 'react';
-import {compose} from 'redux';
 import {Link} from 'react-router-dom';
-import {withUserInfo} from '../../hocs/with-user-info';
-import {UserInfo} from '../../types/user-data';
-import {withLoginInfo} from '../../hocs/with-login-info';
-
-interface Props {
-  isLoggedIn: boolean;
-  userInfo: UserInfo;
-}
+import {useSelector} from 'react-redux';
+import {getLoginInfo, getUserInfo} from '../../reducers/user/user-selectors';
 
 
-const Header = (props: Props): JSX.Element => {
-  const {isLoggedIn, userInfo: {email}} = props;
+const Header = (): JSX.Element => {
+  const userInfo = useSelector(getUserInfo);
+  const {email} = userInfo;
+
+  const isLoggedIn = useSelector(getLoginInfo);
 
   const getUserName = (): JSX.Element => {
     return <span className="header__user-name user__name">{email}</span>;
@@ -52,4 +48,4 @@ const Header = (props: Props): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent>(withLoginInfo, withUserInfo)(Header);
+export default Header;

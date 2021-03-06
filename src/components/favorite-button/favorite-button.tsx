@@ -1,11 +1,11 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {compose} from 'redux';
 import {favoriteButtonClass} from '../../constants/constants';
-import {withLoginInfo} from '../../hocs/with-login-info';
 import {withLoginNotice} from '../../hocs/with-login-notice';
 import {Operations} from '../../reducers/user/user';
 import {ActionType} from '../../reducers/user/user';
+import {getLoginInfo} from '../../reducers/user/user-selectors';
 import {Offer} from '../../types/offers-data';
 
 interface Props {
@@ -14,14 +14,14 @@ interface Props {
 }
 
 interface InjectedProps {
-  isLoggedIn: boolean;
   showLoginNotice: () => ActionType;
 }
 
 const FavoriteButton = (props: Props & InjectedProps): JSX.Element => {
-
-  const {offer, type, isLoggedIn, showLoginNotice} = props;
+  const {offer, type, showLoginNotice} = props;
   const {id, isBookmarked} = offer;
+
+  const isLoggedIn = useSelector(getLoginInfo);
 
   const dispatch = useDispatch();
 
@@ -53,4 +53,4 @@ const FavoriteButton = (props: Props & InjectedProps): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent<Props>>(withLoginNotice, withLoginInfo)(FavoriteButton);
+export default compose<React.FunctionComponent<Props>>(withLoginNotice)(FavoriteButton);

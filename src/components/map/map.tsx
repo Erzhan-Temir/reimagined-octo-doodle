@@ -1,18 +1,9 @@
 import React, {useRef, useEffect} from 'react';
-import {compose} from 'redux';
 import L from 'leaflet';
-import {Offer} from '../../types/offers-data';
 import {cities} from '../../constants/constants';
 import './map.css';
-import {withActiveOfferId} from '../../hocs/with-active-offer-id';
-import {withCurrentCity} from '../../hocs/with-current-city';
-import {withOffers} from '../../hocs/with-offers';
-
-type Props = {
-  offers: Offer[],
-  currentCity: string,
-  activeOfferId: null|string,
-};
+import {useSelector} from 'react-redux';
+import {getActiveOfferID, getCurrentCity, getOffersFilteredByCity} from '../../reducers/offers-data/offers-data-selectors';
 
 const pin = L.icon({
   iconUrl: '/img/pin.svg',
@@ -24,8 +15,11 @@ const activePin = L.icon({
   iconSize: [30, 42],
 });
 
-const Map = (props: Props): JSX.Element => {
-  const {offers, currentCity, activeOfferId} = props;
+const Map = (): JSX.Element => {
+  const offers = useSelector(getOffersFilteredByCity);
+  const currentCity = useSelector(getCurrentCity);
+
+  const activeOfferID = useSelector(getActiveOfferID);
 
   const mapRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,7 +44,7 @@ const Map = (props: Props): JSX.Element => {
 
     const offersCopy = offers.slice();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const activeOffer: any = offersCopy.find((offer) => offer.id === activeOfferId);
+    const activeOffer: any = offersCopy.find((offer) => offer.id === activeOfferID);
     const indexOfActiveOffer = offersCopy.indexOf(activeOffer);
 
     if (indexOfActiveOffer > -1) {
@@ -70,7 +64,7 @@ const Map = (props: Props): JSX.Element => {
     createMap();
 
     return () => map.remove();
-  }, [currentCity, activeOfferId]);
+  }, [currentCity, activeOfferID]);
 
 
   return (
@@ -78,4 +72,4 @@ const Map = (props: Props): JSX.Element => {
   );
 };
 
-export default compose<React.FunctionComponent>(withActiveOfferId, withCurrentCity, withOffers)(Map);
+export default Map;
