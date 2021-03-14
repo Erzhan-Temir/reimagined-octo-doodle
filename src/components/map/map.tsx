@@ -4,6 +4,7 @@ import {getActiveOfferID, getCurrentCity, getOffersFilteredByCity} from '../../r
 import L from 'leaflet';
 import {useSelector} from 'react-redux';
 import './map.css';
+import {Offer} from '../../types/offers-data';
 
 const pin = L.icon({
   iconUrl: '/img/pin.svg',
@@ -23,6 +24,21 @@ const Map = (): JSX.Element => {
   const mapRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let map: any;
+
+  const handlePinClick = (offer: Offer) => {
+    L.popup()
+      .setLatLng([offer.coords.LAT, offer.coords.LNG])
+      .setContent(
+          `<img 
+          src="${offer.image}" 
+          style="height: 40px"
+          alt="${offer.heading}" 
+        /><br>
+          <b>${offer.heading}</b><br>
+          <b>&euro;${offer.price} / night</b>`
+      )
+      .openOn(map);
+  };
 
   const createMap = () => {
     const city = cities[currentCity];
@@ -55,7 +71,10 @@ const Map = (): JSX.Element => {
 
     offersCopy.map((offer) => {
       const offerCoords = new L.LatLng(offer.coords.LAT, offer.coords.LNG);
-      L.marker(offerCoords, {icon: pin}).addTo(map);
+      L
+        .marker(offerCoords, {icon: pin})
+        .addTo(map)
+        .on('click', () => handlePinClick(offer));
     });
   };
 
